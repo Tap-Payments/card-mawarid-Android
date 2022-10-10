@@ -11,6 +11,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         ThemeManager.loadTapTheme(this.resources,R.raw.defaultlighttheme,"lighttheme")
+        ThemeManager.currentTheme = R.raw.defaultlighttheme.toString()
         LocalizationManager.loadTapLocale(this.resources,R.raw.lang)
         LocalizationManager.setLocale(this, Locale("en"))
     }

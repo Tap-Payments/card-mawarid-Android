@@ -4,7 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.21458333333333332" />
+        <entry key="tapcardsdk/src/main/res/layout/card_brand_view.xml" value="0.13229166666666667" />
         <entry key="tapcardsdk/src/main/res/layout/card_input_form.xml" value="0.14739583333333334" />
+        <entry key="tapcardsdk/src/main/res/layout/card_input_widget.xml" value="0.14739583333333334" />
       </map>
     </option>
   </component>

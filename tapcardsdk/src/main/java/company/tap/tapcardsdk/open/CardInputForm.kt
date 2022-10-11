@@ -781,6 +781,10 @@ class CardInputForm @JvmOverloads constructor(
             cvvNumber  = cvcNumberEditText.fieldText
         }
 
+        holderNameEditText.completionCallback={
+            cardHolderName = holderNameEditText.holderName
+        }
+
 
 //        allFields.forEach { it.addTextChangedListener(inputChangeTextWatcher) }
 

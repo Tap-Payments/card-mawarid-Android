@@ -20,7 +20,9 @@ class HolderNameEditText @JvmOverloads constructor(
     defStyleAttr: Int = androidx.appcompat.R.attr.editTextStyle
 ) : TapTextInput(context, attrs, defStyleAttr) {
 
-
+    // invoked when a valid date has been entered
+    @JvmSynthetic
+    internal var completionCallback: () -> Unit = {}
     internal val holderName: String?
         get() {
             return fieldText
@@ -33,6 +35,7 @@ class HolderNameEditText @JvmOverloads constructor(
         addTextChangedListener(object : TapTextWatcher() {
             override fun afterTextChanged(s: Editable?) {
                 shouldShowError = false
+                completionCallback()
             }
         })
 

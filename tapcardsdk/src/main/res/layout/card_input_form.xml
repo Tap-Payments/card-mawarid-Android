@@ -81,26 +81,41 @@
                 android:src="@drawable/icon_creditcard"/>
         </LinearLayout>
 
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
 
-                <company.tap.tapcardsdk.internal.ui.views.ExpiryDateEditText
-                    android:id="@+id/expiry_date_edit_text"
-                   android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_gravity="start"
-                    android:background="@drawable/edittext_background"
-                    android:layout_marginTop="20dp"
-                    android:fontFamily="sans-serif-light"
-                    android:gravity="start|end"
-                    android:hint="@string/expiry_date_hint"
-                    android:imeOptions="actionNext"
-                    android:inputType="date"
-                    android:maxLength="5"
-                    android:padding="5dp"
+            <company.tap.tapcardsdk.internal.ui.views.ExpiryDateEditText
+                android:id="@+id/expiry_date_edit_text"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_gravity="start"
+                android:background="@drawable/edittext_background"
+                android:layout_marginTop="20dp"
+                android:fontFamily="sans-serif-light"
+                android:gravity="start|end"
+                android:hint="@string/expiry_date_hint"
+                android:imeOptions="actionNext"
+                android:inputType="date"
+                android:maxLength="5"
+                android:padding="5dp"
 
 
-                    android:textDirection="locale" />
+                android:textDirection="locale" />
+            <ImageView
+                android:id="@+id/date_picker_actions"
+                android:padding="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/expiry_date_edit_text"
+                android:layout_alignBottom="@+id/expiry_date_edit_text"
+                android:layout_alignRight="@+id/expiry_date_edit_text"
+                android:src="@drawable/ic_card" />
+
+        </RelativeLayout>
+
 
 
         <company.tap.tapcardsdk.internal.ui.views.CvcEditText

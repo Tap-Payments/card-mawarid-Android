@@ -27,7 +27,7 @@
         "textFields": {
             "textColor": "#ffffff",
             "errorTextColor": "#ea611c",
-            "font" : "Roboto-Light,17",
+            "font" : "Roboto-Light,17"
 
         }
 }

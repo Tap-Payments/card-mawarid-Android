@@ -1,10 +1,12 @@
 package company.tap.tapcardsdk.open
 
 import android.annotation.SuppressLint
+import android.app.DatePickerDialog
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.Typeface
+import android.os.Build
 import android.os.Bundle
 import android.os.Parcelable
 import android.text.*
@@ -52,6 +54,9 @@ import company.tap.tapuilibrary.themekit.theme.TextViewTheme
 import company.tap.tapuilibrary.uikit.atoms.TapTextInput
 import company.tap.tapuilibrary.uikit.utils.TapTextWatcher
 import company.tap.tapuilibrary.uikit.views.TapAlertView
+import java.text.SimpleDateFormat
+import java.util.*
+import javax.xml.datatype.DatatypeConstants.MONTHS
 import kotlin.properties.Delegates
 
 /**
@@ -96,6 +101,7 @@ class CardInputForm @JvmOverloads constructor(
     private var cardValidCallback: CardValidCallback? = null
     lateinit var alertView :TapAlertView
     val cardDetailsText = viewBinding.cardDetailsText
+    val datePicker = viewBinding.datePickerActions
     lateinit var nfcButton :ImageView
     lateinit var scannerButton :ImageView
     lateinit var closeButton :ImageView
@@ -792,6 +798,7 @@ class CardInputForm @JvmOverloads constructor(
 
          initLocals()
         initTheme()
+        clickAction()
 
 
 
@@ -806,6 +813,12 @@ class CardInputForm @JvmOverloads constructor(
             }
         })
 
+    }
+
+    private fun clickAction() {
+        datePicker.setOnClickListener {
+            datePickerAction()
+        }
     }
 
     private fun initTheme() {
@@ -836,6 +849,31 @@ class CardInputForm @JvmOverloads constructor(
         checkBoxSaveCard.textSize = ThemeManager.getFontSize("cardView.saveLabel.font").toFloat()
         if (context?.let { LocalizationManager.getLocale(it).language } == "en") setFontsEnglish() else setFontsArabic()
 
+    }
+
+   private fun datePickerAction(){
+        val c = Calendar.getInstance()
+        val year = c.get(Calendar.YEAR)
+        val month = c.get(Calendar.MONTH)
+        val day = c.get(Calendar.DAY_OF_MONTH)
+
+
+        val dpd = DatePickerDialog(context, DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+            val myFormat = "MM/YY" // mention the format you need
+            val sdf = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                SimpleDateFormat(myFormat, Locale.US)
+            } else {
+                TODO("VERSION.SDK_INT < N")
+            }
+
+            expiryDateEditText.setText(sdf.format(c.time) )
+
+            // Display Selected date in textbox
+          //  expiryDateEditText.setText(month.toString()+ "/ " + year)
+
+        }, year, month, day)
+
+        dpd.show()
     }
 
     private fun initLocals() {

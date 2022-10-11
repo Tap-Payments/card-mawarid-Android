@@ -14,11 +14,12 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:id="@+id/container"
+        android:layoutDirection="locale"
 
         >
 
 
-            <company.tap.tapcardsdk.views.HolderNameEditText
+            <company.tap.tapcardsdk.internal.ui.views.HolderNameEditText
                 android:id="@+id/holder_name_edit_text"
                 style="@style/Tap.CardInputWidget.EditText"
                 android:layout_width="match_parent"
@@ -46,7 +47,7 @@
             android:weightSum="1">
 
 
-                <company.tap.tapcardsdk.views.CardNumberEditText
+                <company.tap.tapcardsdk.internal.ui.views.CardNumberEditText
                     android:id="@+id/card_number_edit_text"
                     android:layout_weight="1"
                     android:layout_width="0dp"
@@ -76,14 +77,14 @@
         </LinearLayout>
 
 
-                <company.tap.tapcardsdk.views.ExpiryDateEditText
+                <company.tap.tapcardsdk.internal.ui.views.ExpiryDateEditText
                     android:id="@+id/expiry_date_edit_text"
                    android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_gravity="start"
-        android:background="@drawable/edittext_background"
+                    android:background="@drawable/edittext_background"
                     android:layout_marginTop="20dp"
                     android:fontFamily="sans-serif-light"
                     android:gravity="start|end"
@@ -100,16 +101,16 @@
 
 
 
-                <company.tap.tapcardsdk.views.CvcEditText
+                <company.tap.tapcardsdk.internal.ui.views.CvcEditText
                     android:id="@+id/cvc_edit_text"
-                    style="@style/Tap.Base.CardInputWidget.EditText"
+
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:fontFamily="sans-serif-light"
                     android:textDirection="locale"
                     android:contentDescription="@string/acc_label_cvc_node"
                     android:background="@drawable/edittext_background"
-                android:layout_marginTop="20dp"
+                    android:layout_marginTop="20dp"
                    android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     android:padding="5dp"
@@ -127,12 +128,13 @@
         <CheckBox
             android:id="@+id/checkBoxSaveCard"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_weight="1"
             android:layout_marginTop="20dp"
             android:buttonTint="@color/red_error"
             android:textColor="@color/red_error"
-            android:text="Save your Card For next transactions" />
+            android:layoutDirection="locale"
+            tools:text="Save your Card For next transactions" />
 
 
 

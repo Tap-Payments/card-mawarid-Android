@@ -17,7 +17,7 @@
         android:layout_gravity="center"
         android:text="Enter Card Details"/>
 
-    <company.tap.tapcardsdk.widget.CardInputForm
+    <company.tap.tapcardsdk.open.CardInputForm
         android:id="@+id/cardInputForm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

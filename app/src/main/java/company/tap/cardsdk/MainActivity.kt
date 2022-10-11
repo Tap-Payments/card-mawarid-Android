@@ -12,11 +12,17 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+      themeLanguageLocalizations()
+
         setContentView(R.layout.activity_main)
+    }
+
+    private fun themeLanguageLocalizations() {
+
         ThemeManager.loadTapTheme(this.resources,R.raw.defaultlighttheme,"lighttheme")
         ThemeManager.currentTheme = R.raw.defaultlighttheme.toString()
-        LocalizationManager.loadTapLocale(this.resources,R.raw.lang)
-        LocalizationManager.setLocale(this, Locale("en"))
+        LocalizationManager.loadTapLocale(this.resources,R.raw.cardlocalisation)
+        LocalizationManager.setLocale(this, Locale("ar"))
     }
 
     @RequiresApi(Build.VERSION_CODES.N)

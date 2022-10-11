@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         ThemeManager.loadTapTheme(this.resources,R.raw.defaultdarktheme,"darktheme")
         ThemeManager.currentTheme = R.raw.defaultdarktheme.toString()
         LocalizationManager.loadTapLocale(this.resources,R.raw.cardlocalisation)
-        LocalizationManager.setLocale(this, Locale("ar"))
+        LocalizationManager.setLocale(this, Locale("en"))
     }
 
     @RequiresApi(Build.VERSION_CODES.N)

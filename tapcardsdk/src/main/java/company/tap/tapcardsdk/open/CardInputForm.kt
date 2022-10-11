@@ -2,7 +2,9 @@ package company.tap.tapcardsdk.open
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.res.ColorStateList
 import android.graphics.Color
+import android.graphics.Typeface
 import android.os.Bundle
 import android.os.Parcelable
 import android.text.*
@@ -44,6 +46,7 @@ import company.tap.tapcardsdk.databinding.CardInputFormBinding
 import company.tap.tapcardsdk.internal.logic.api.models.CreateTokenCard
 import company.tap.tapcardsdk.internal.ui.widget.BackUpFieldDeleteListener
 import company.tap.taplocalizationkit.LocalizationManager
+import company.tap.tapuilibrary.fontskit.enums.TapFont
 import company.tap.tapuilibrary.themekit.ThemeManager
 import company.tap.tapuilibrary.themekit.theme.TextViewTheme
 import company.tap.tapuilibrary.uikit.atoms.TapTextInput
@@ -782,17 +785,7 @@ class CardInputForm @JvmOverloads constructor(
         initTheme()
 
 
-        if(ThemeManager.currentTheme!=null) {
 
-         /*   cardNumberEditText.setHintTextColor(Color.parseColor(ThemeManager.getValue("emailCard.textFields.placeHolderColor")))
-            cardNumberEditText.setTextColor(Color.parseColor(ThemeManager.getValue("emailCard.textFields.textColor")))
-            expiryDateEditText.setHintTextColor(Color.parseColor(ThemeManager.getValue("emailCard.textFields.placeHolderColor")))
-            expiryDateEditText.setTextColor(Color.parseColor(ThemeManager.getValue("emailCard.textFields.textColor")))
-            cvcNumberEditText.setHintTextColor(Color.parseColor(ThemeManager.getValue("emailCard.textFields.placeHolderColor")))
-            cvcNumberEditText.setTextColor(Color.parseColor(ThemeManager.getValue("emailCard.textFields.textColor")))
-            holderNameEditText.setHintTextColor(Color.parseColor(ThemeManager.getValue("emailCard.textFields.placeHolderColor")))
-            holderNameEditText.setTextColor(Color.parseColor(ThemeManager.getValue("emailCard.textFields.textColor")))*/
-        }
         cardNumberEditText.setOnEditorActionListener(object : TextView.OnEditorActionListener {
             override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
@@ -825,10 +818,9 @@ class CardInputForm @JvmOverloads constructor(
 
 
         checkBoxSaveCard.setTextColor(Color.parseColor(ThemeManager.getValue("cardView.saveLabel.textColor")))
-        checkBoxSaveCard.backgroundTintList=ContextCompat.getColorStateList(context,R.color.checkboxcolor)
+        checkBoxSaveCard.backgroundTintList = ColorStateList.valueOf(Color.parseColor(ThemeManager.getValue("cardView.saveLabel.textColor")))
         checkBoxSaveCard.textSize = ThemeManager.getFontSize("cardView.saveLabel.font").toFloat()
-        //checkBoxSaveCard.typeface = ThemeManager.getFontName("cardView.saveLabel.font")
-
+        if (context?.let { LocalizationManager.getLocale(it).language } == "en") setFontsEnglish() else setFontsArabic()
 
     }
 
@@ -1337,6 +1329,68 @@ class CardInputForm @JvmOverloads constructor(
 
         // TODO: Add address handling here.
     }
+
+   private fun setFontsEnglish() {
+        cardNumberEditText.typeface = Typeface.createFromAsset(
+            context?.assets, TapFont.tapFontType(
+                TapFont.TajawalLight
+            )
+        )
+
+        holderNameEditText.typeface = Typeface.createFromAsset(
+            context?.assets, TapFont.tapFontType(
+                TapFont.TajawalLight
+            )
+        )
+
+        cvcNumberEditText.typeface = Typeface.createFromAsset(
+            context?.assets, TapFont.tapFontType(
+                TapFont.TajawalLight
+            )
+        )
+       expiryDateEditText.typeface = Typeface.createFromAsset(
+            context?.assets, TapFont.tapFontType(
+                TapFont.TajawalLight
+            )
+        )
+       checkBoxSaveCard.typeface = Typeface.createFromAsset(
+            context?.assets, TapFont.tapFontType(
+                TapFont.RobotoRegular
+            )
+        )
+
+    }
+    private  fun setFontsArabic() {
+        cardNumberEditText.typeface = Typeface.createFromAsset(
+            context?.assets, TapFont.tapFontType(
+                TapFont.TajawalMedium
+            )
+        )
+
+        cvcNumberEditText.typeface = Typeface.createFromAsset(
+            context?.assets, TapFont.tapFontType(
+                TapFont.TajawalMedium
+            )
+        )
+
+        expiryDateEditText.typeface = Typeface.createFromAsset(
+            context?.assets, TapFont.tapFontType(
+                TapFont.TajawalMedium
+            )
+        )
+        holderNameEditText.typeface = Typeface.createFromAsset(
+            context?.assets, TapFont.tapFontType(
+                TapFont.TajawalMedium
+            )
+        )
+        checkBoxSaveCard.typeface = Typeface.createFromAsset(
+            context?.assets, TapFont.tapFontType(
+                TapFont.TajawalMedium
+            )
+        )
+
+    }
+
 
     }
 

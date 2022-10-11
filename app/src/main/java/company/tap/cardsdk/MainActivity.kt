@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity() , TapCardInputDelegate {
 
     lateinit var cardInputForm: CardInputForm
     var dataConfiguration: DataConfiguration = DataConfiguration
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val selectedLanguage:String = intent.getStringExtra("languageSelected").toString()
@@ -96,7 +97,8 @@ class MainActivity : AppCompatActivity() , TapCardInputDelegate {
     }
 
     override fun backendUnknownError(message: String?) {
-
+        println("backendUnknownError> errorMessage>>>>" + message)
+        showDialogAlert("backendUnknownError" , "backendUnknownError" + message)
     }
 
     override fun cardNotSupported(message: String?) {

@@ -17,7 +17,13 @@
         android:layoutDirection="locale"
 
         >
-
+        <TextView
+            android:id="@+id/cardDetailsText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginLeft="@dimen/margin_basic_10dp"
+            android:text="Enter Card Details"/>
 
             <company.tap.tapcardsdk.internal.ui.views.HolderNameEditText
                 android:id="@+id/holder_name_edit_text"

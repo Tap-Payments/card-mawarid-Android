@@ -95,6 +95,7 @@ class CardInputForm @JvmOverloads constructor(
     private var cardInputListener: CardInputListener? = null
     private var cardValidCallback: CardValidCallback? = null
     lateinit var alertView :TapAlertView
+    val cardDetailsText = viewBinding.cardDetailsText
     lateinit var nfcButton :ImageView
     lateinit var scannerButton :ImageView
     lateinit var closeButton :ImageView
@@ -757,7 +758,8 @@ class CardInputForm @JvmOverloads constructor(
         cardNumberEditText.completionCallback = {
             expiryDateEditText.visibility = View.VISIBLE
             cvcNumberEditText.visibility = View.VISIBLE
-            println("cardNumberEditText is????"+cardNumberEditText.cardNumber)
+           // println("cardNumberEditText is????"+cardNumberEditText.cardNumber)
+            cardNumber = cardNumberEditText.cardNumber
            // scrollEnd()
             cardInputListener?.onCardComplete()
         }
@@ -771,17 +773,20 @@ class CardInputForm @JvmOverloads constructor(
         expiryDateEditText.completionCallback = {
             cvcNumberEditText.requestFocus()
             cardInputListener?.onExpirationComplete()
+            expiryDate  = expiryDateEditText.fieldText
         }
 
         cvcNumberEditText.completionCallback = {
             holderNameEditText.requestFocus()
-
+            cvvNumber  = cvcNumberEditText.fieldText
         }
+
 
 //        allFields.forEach { it.addTextChangedListener(inputChangeTextWatcher) }
 
         cardNumberEditText.requestFocus()
-       initLocals()
+
+         initLocals()
         initTheme()
 
 
@@ -809,6 +814,11 @@ class CardInputForm @JvmOverloads constructor(
         cvcNumberEditText.setTextColor(Color.parseColor(ThemeManager.getValue("cardView.textFields.textColor")))
         holderNameEditText.setHintTextColor(Color.parseColor(ThemeManager.getValue("cardView.textFields.placeholderColor")))
         holderNameEditText.setTextColor(Color.parseColor(ThemeManager.getValue("cardView.textFields.textColor")))
+        cardDetailsText.setTextColor(Color.parseColor(ThemeManager.getValue("cardView.titleLabel.textColor")))
+        cardDetailsText.textSize = ThemeManager.getFontSize("cardView.titleLabel.font").toFloat()
+
+        val cardDetText : String = LocalizationManager.getValue("title","cardForm")
+        cardDetailsText.text = cardDetText
 
 
         cardNumberEditText.textSize = ThemeManager.getFontSize("cardView.textFields.font").toFloat()
@@ -1358,6 +1368,11 @@ class CardInputForm @JvmOverloads constructor(
                 TapFont.RobotoRegular
             )
         )
+       cardDetailsText.typeface = Typeface.createFromAsset(
+            context?.assets, TapFont.tapFontType(
+                TapFont.TajawalRegular
+            )
+        )
 
     }
     private  fun setFontsArabic() {
@@ -1386,6 +1401,11 @@ class CardInputForm @JvmOverloads constructor(
         checkBoxSaveCard.typeface = Typeface.createFromAsset(
             context?.assets, TapFont.tapFontType(
                 TapFont.TajawalMedium
+            )
+        )
+        cardDetailsText.typeface = Typeface.createFromAsset(
+            context?.assets, TapFont.tapFontType(
+                TapFont.TajawalRegular
             )
         )
 

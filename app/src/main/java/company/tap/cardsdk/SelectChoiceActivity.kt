@@ -119,8 +119,8 @@ class SelectChoiceActivity : AppCompatActivity() {
             val intent = Intent(this, MainActivity::class.java)
             intent.putExtra("languageSelected", selectedUserLanguage)
             intent.putExtra("themeSelected", selectedUserTheme)
-
             intent.putExtra("selectedCurrency", selectedCurrency)
+
 
             finish()
             startActivity(intent)

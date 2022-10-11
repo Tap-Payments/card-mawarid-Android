@@ -1,35 +1,54 @@
 package company.tap.cardsdk
 
+import android.content.DialogInterface
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
+import company.tap.tapcardformkit.open.SdkMode
+import company.tap.tapcardsdk.internal.logic.api.models.Charge
+import company.tap.tapcardsdk.internal.logic.api.models.TapCardDataConfiguration
+import company.tap.tapcardsdk.internal.logic.api.models.Token
 import company.tap.tapcardsdk.open.CardInputForm
 import company.tap.tapcardsdk.open.DataConfiguration
-import company.tap.taplocalizationkit.LocalizationManager
-import company.tap.tapuilibrary.themekit.ThemeManager
+import company.tap.tapcardsdk.open.TapCardInputDelegate
+import company.tap.tapnetworkkit.exception.GoSellError
 import java.util.*
 
-class MainActivity : AppCompatActivity() {
-    lateinit var cardDetailsText:TextView
+class MainActivity : AppCompatActivity() , TapCardInputDelegate {
+
     lateinit var cardInputForm: CardInputForm
     var dataConfiguration: DataConfiguration = DataConfiguration
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val selectedLanguage:String = intent.getStringExtra("languageSelected").toString()
         val selectedTheme:String = intent.getStringExtra("themeSelected").toString()
+        val selectedCurrency:String = intent.getStringExtra("selectedCurrency").toString()
         logicToHandleThemeLanguageChange(selectedLanguage,selectedTheme)
 
         setContentView(R.layout.activity_main)
-        cardDetailsText = findViewById(R.id.cardDetailsText)
+
         cardInputForm = findViewById(R.id.cardInputForm)
-        val cardDetText : String = LocalizationManager.getValue("title","cardForm")
-        cardDetailsText.text = cardDetText
+
+        initializeForm(selectedLanguage,selectedTheme,selectedCurrency)
+
+
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
+    private fun initializeForm(
+        selectedLanguage: String,
+        selectedTheme: String,
+        selectedCurrency: String
+    ) {
+        dataConfiguration.addCardInputDelegate(this) //** Required **
+        dataConfiguration.initCardForm(this, TapCardDataConfiguration("sk_test_kovrMB0mupFJXfNZWx6Etg5y","company.tap.goSellSDKExample" ,null, SdkMode.SAND_BOX,selectedLanguage,
+            selectedCurrency,
+            ),cardInputForm)
 
+    }
 
     @RequiresApi(Build.VERSION_CODES.N)
     fun tokenizeCard(view: View) {
@@ -58,5 +77,69 @@ class MainActivity : AppCompatActivity() {
 
         dataConfiguration.setLocale(this, selectedLanguage, null, resources, R.raw.cardlocalisation)
 
+    }
+
+    override fun cardTokenizedSuccessfully(token: Token) {
+        println("Card Tokenized Succeeded : ")
+        println("Token card : " + token.card?.firstSix.toString() + " **** " + token.card?.lastFour)
+        println("Token card : " + token.card?.fingerprint.toString() + " **** " + token.card?.funding)
+        println("Token card : " + token.card?.id.toString() + " ****** " + token.card?.name)
+        println("Token card : " + token.card?.address.toString() + " ****** " + token.card?.`object`)
+        println("Token card : " + token.card?.expirationMonth.toString() + " ****** " + token.card?.expirationYear)
+        showDialogAlert("cardTokenizedSuccessfully","token is >> "+ token.id)
+    }
+
+    override fun cardTokenizedFailed(goSellError: GoSellError?) {
+        println("sdkError> errorMessage>>>>" + goSellError?.errorMessage)
+        println("sdkError errorBody>>>>>" + goSellError?.errorBody)
+        showDialogAlert("Tokenizationfailed" , "Token failed reason >>"+ goSellError?.errorMessage)
+    }
+
+    override fun backendUnknownError(message: String?) {
+
+    }
+
+    override fun cardNotSupported(message: String?) {
+
+    }
+
+    override fun cardFormIsGettingReady() {
+        println("<<<<<<<<<<cardFormIsGettingReady>>>>>>>>>")
+    }
+
+    override fun cardFormIsReady() {
+        println("<<<<<<<<<<cardFormIsReady>>>>>>>>>")
+
+    }
+
+    override fun cardSavedSuccessfully(saveCard: Charge) {
+
+    }
+
+    override fun cardSavingFailed(chargeError: Charge) {
+
+    }
+
+    private fun showDialogAlert(title : String? ,message: String?){
+        val dialogBuilder = AlertDialog.Builder(this)
+        // set message of alert dialog
+        dialogBuilder.setMessage(message)
+            // if the dialog is cancelable
+            .setCancelable(false)
+            // positive button text and action
+            .setPositiveButton("OK", DialogInterface.OnClickListener {
+                    dialog, id -> finish()
+            })
+            // negative button text and action
+            .setNegativeButton("Cancel", DialogInterface.OnClickListener {
+                    dialog, id -> dialog.cancel()
+            })
+
+        // create dialog box
+        val alert = dialogBuilder.create()
+        // set title for alert dialog box
+        alert.setTitle(title)
+        // show alert dialog
+        alert.show()
     }
 }

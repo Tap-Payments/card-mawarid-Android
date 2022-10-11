@@ -26,7 +26,7 @@ data class Gateway(
     @Nullable var publicKey: String,
     @SerializedName("merchantId")
     @Expose
-    @Nullable var merchantId: String,
+    @Nullable var merchantId: String?,
     @SerializedName("config")
     @Expose
     @Nullable var config: Config,

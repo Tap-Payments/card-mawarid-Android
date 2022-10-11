@@ -11,12 +11,7 @@
     tools:context=".MainActivity">
 
 
-    <TextView
-        android:id="@+id/cardDetailsText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Enter Card Details"/>
+
 
     <company.tap.tapcardsdk.open.CardInputForm
         android:id="@+id/cardInputForm"

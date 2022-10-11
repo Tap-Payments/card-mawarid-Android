@@ -182,8 +182,8 @@ object DataConfiguration  {
         tapCardInputView: CardInputForm
     ) {
         PaymentDataSource.setSelectedCurrency(dataConfig.selectedCurrency)
-        PaymentDataSource.setCardType(dataConfig.selectedCardType)
-        println("dataConfig.defaultCardHolderName"+dataConfig.defaultCardHolderName)
+      //  PaymentDataSource.setCardType(dataConfig.selectedCardType)
+
         if(dataConfig.defaultCardHolderName == "null"){
            PaymentDataSource.setDefaultCardHolderName("")
         }else{
@@ -199,12 +199,11 @@ object DataConfiguration  {
             "NATIVE")
         val requestModel =
             TapConfigRequestModel(dataConfig.authToken?.let {
-                dataConfig.merchantId?.let { it1 ->
-                    Gateway(
-                        it, it1,
+                Gateway(
+                        it, null,
                         Config(NetworkApp.getApplicationInfo())
                     )
-                }
+
             })
 
 

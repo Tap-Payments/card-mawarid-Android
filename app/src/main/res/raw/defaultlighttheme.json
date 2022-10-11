@@ -21,5 +21,12 @@
             "checkedIcon":"check"
         },
         "cardIcon":"card-icon"
+    },
+    "emailCard": {
+        "textFields": {
+            "textColor": "#4b4847",
+            "errorTextColor": "#ea611c",
+            "font": "Roboto-Light,17"
+        }
     }
 }

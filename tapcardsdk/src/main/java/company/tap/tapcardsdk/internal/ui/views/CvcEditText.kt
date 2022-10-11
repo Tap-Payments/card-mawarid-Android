@@ -14,6 +14,7 @@ import company.tap.tapcardsdk.internal.ui.brandtypes.CardBrand
 import company.tap.tapcardsdk.R
 import company.tap.tapuilibrary.uikit.atoms.TapTextInput
 import company.tap.tapuilibrary.uikit.utils.TapTextWatcher
+import java.util.*
 
 /**
  * A [TapEditText] for CVC input.
@@ -54,9 +55,11 @@ class CvcEditText @JvmOverloads constructor(
         setErrorMessage(resources.getString(R.string.invalid_cvc))
         maxLines = 1
         filters = createFilters(CardBrand.Unknown)
+        textDirection = View.TEXT_DIRECTION_LOCALE
+        layoutDirection = View.LAYOUT_DIRECTION_LOCALE
 
-       // inputType = InputType.TYPE_NUMBER_VARIATION_PASSWORD
-        inputType = TYPE_CLASS_NUMBER or TYPE_NUMBER_VARIATION_PASSWORD
+
+       // inputType = TYPE_CLASS_NUMBER or TYPE_NUMBER_VARIATION_PASSWORD
         keyListener = DigitsKeyListener.getInstance(false, true)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

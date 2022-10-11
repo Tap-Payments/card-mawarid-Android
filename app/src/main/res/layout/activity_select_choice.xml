@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".SelectChoiceActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:chainUseRtl="true"
+        android:layoutDirection="locale"
+        tools:context=".activities.SelectChoiceActivity">
+
+<androidx.appcompat.widget.AppCompatTextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:textColor="@color/black_color"
+    android:text="Customize your card"/>
+    <RadioGroup
+        android:layout_margin="@dimen/margin_basic_10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:id="@+id/radioGroup">
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_language"
+            android:layout_width="0dp"
+            android:layout_weight="50"
+            android:layout_height="wrap_content"
+            android:text="Choose Language:"
+            android:layout_gravity="center"
+            />
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:layout_width="0dp"
+            android:layout_weight="50"
+            android:layout_height="wrap_content"
+            android:text="English"
+            android:id="@+id/lang_english"
+            android:checked="true"
+            />
+
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:layout_width="0dp"
+            android:layout_weight="50"
+            android:layout_height="wrap_content"
+            android:text="العربية"
+            android:id="@+id/lang_arabic"
+            android:checked="false" />
+
+    </RadioGroup>
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:id="@+id/radioGroup2"
+        android:layout_margin="@dimen/margin_basic_10dp">
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_theme"
+            android:layout_width="0dp"
+            android:layout_weight="50"
+            android:layout_height="wrap_content"
+            android:text="Choose Theme:"
+            android:layout_gravity="center"
+            />
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:layout_width="0dp"
+            android:layout_weight="50"
+            android:layout_height="wrap_content"
+            android:text="Dark"
+            android:id="@+id/theme_dark"
+            android:checked="false"
+            />
+
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:layout_width="0dp"
+            android:layout_weight="50"
+            android:layout_height="wrap_content"
+            android:text="Light"
+            android:id="@+id/theme_light"
+            android:checked="true" />
+
+    </RadioGroup>
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/black_color"
+        android:text="Select your Currency"/>
+    <com.google.android.material.button.MaterialButtonToggleGroup
+        android:id="@+id/toggleButtonGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:singleSelection="true"
+        android:layout_gravity="center"
+        app:selectionRequired="true"
+        app:checkedButton="@+id/btnKuwait"
+      >
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnKuwait"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="KWD" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnUae"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="AED" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSaudi"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SAR" />
+
+    </com.google.android.material.button.MaterialButtonToggleGroup>
+
+ <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="match_parent"
+            android:layout_margin="20dp"
+            android:layout_height="wrap_content"
+            android:text="Done"
+            android:backgroundTint="@color/button_green"
+            android:onClick="startTokenizationactivity"/>
+
+    </LinearLayout>
+
+</ScrollView>

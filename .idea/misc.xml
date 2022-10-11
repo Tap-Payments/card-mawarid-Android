@@ -5,6 +5,8 @@
       <map>
         <entry key="../../../../../layout/custom_preview.xml" value="0.23020833333333332" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.21458333333333332" />
+        <entry key="app/src/main/res/layout/activity_select_choice.xml" value="0.16822916666666668" />
+        <entry key="app/src/main/res/menu/menumain.xml" value="0.22447916666666667" />
         <entry key="tapcardsdk/src/main/res/drawable/edittext_background.xml" value="0.1345" />
         <entry key="tapcardsdk/src/main/res/layout/activity_web_view.xml" value="0.171875" />
         <entry key="tapcardsdk/src/main/res/layout/card_brand_view.xml" value="0.13229166666666667" />

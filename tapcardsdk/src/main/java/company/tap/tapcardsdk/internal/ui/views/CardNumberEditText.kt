@@ -204,7 +204,7 @@ class CardNumberEditText @JvmOverloads constructor(
                 if (fieldText.length == lengthMax) {
                     val wasCardNumberValid = isCardNumberValid
                     isCardNumberValid = CardUtils.isValidCardNumber(fieldText)
-                    shouldShowError = !isCardNumberValid
+                  //  shouldShowError = !isCardNumberValid
                     if (!wasCardNumberValid && isCardNumberValid) {
                         completionCallback()
                     } else {
@@ -214,7 +214,7 @@ class CardNumberEditText @JvmOverloads constructor(
                     isCardNumberValid = CardUtils.isValidCardNumber(fieldText)
                     //Showing red color until card is valid -- made true
                     // Don't show errors if we aren't full-length.
-                    shouldShowError = true
+                    shouldShowError = false
                     displayErrorCallback(false)
                 }
             }

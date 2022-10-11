@@ -137,12 +137,12 @@ object DataConfiguration  {
 
 
     @RequiresApi(Build.VERSION_CODES.N)
-    private fun startTokenizingCard(tapCardInputView: CardInputForm, activity: AppCompatActivity) {
+    private fun startTokenizingCard(cardInputForm: CardInputForm, activity: AppCompatActivity) {
         CardViewModel().processEvent(
             CardViewEvent.CreateTokenEvent,
-            tapCardInputView.getCard(),
+            cardInputForm.getCard(),
             _context ,
-            tapCardInputView,null,null,activity
+            cardInputForm,null,null,activity
             )
     }
 

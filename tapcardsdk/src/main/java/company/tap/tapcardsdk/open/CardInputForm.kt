@@ -2,6 +2,7 @@ package company.tap.tapcardsdk.open
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.os.Parcelable
 import android.text.*
@@ -19,6 +20,7 @@ import androidx.annotation.ColorInt
 import androidx.annotation.IdRes
 import androidx.annotation.IntRange
 import androidx.annotation.VisibleForTesting
+import androidx.core.content.ContextCompat
 import androidx.core.view.AccessibilityDelegateCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.accessibility.AccessibilityNodeInfoCompat
@@ -43,6 +45,7 @@ import company.tap.tapcardsdk.internal.logic.api.models.CreateTokenCard
 import company.tap.tapcardsdk.internal.ui.widget.BackUpFieldDeleteListener
 import company.tap.taplocalizationkit.LocalizationManager
 import company.tap.tapuilibrary.themekit.ThemeManager
+import company.tap.tapuilibrary.themekit.theme.TextViewTheme
 import company.tap.tapuilibrary.uikit.atoms.TapTextInput
 import company.tap.tapuilibrary.uikit.utils.TapTextWatcher
 import company.tap.tapuilibrary.uikit.views.TapAlertView
@@ -776,6 +779,7 @@ class CardInputForm @JvmOverloads constructor(
 
         cardNumberEditText.requestFocus()
        initLocals()
+        initTheme()
 
 
         if(ThemeManager.currentTheme!=null) {
@@ -799,6 +803,32 @@ class CardInputForm @JvmOverloads constructor(
                 return false
             }
         })
+
+    }
+
+    private fun initTheme() {
+        containerLayout.setBackgroundColor(Color.parseColor(ThemeManager.getValue("cardView.containter.backgroundColor")))
+        cardNumberEditText.setHintTextColor(Color.parseColor(ThemeManager.getValue("cardView.textFields.placeholderColor")))
+        cardNumberEditText.setTextColor(Color.parseColor(ThemeManager.getValue("cardView.textFields.textColor")))
+        expiryDateEditText.setHintTextColor(Color.parseColor(ThemeManager.getValue("cardView.textFields.placeholderColor")))
+        expiryDateEditText.setTextColor(Color.parseColor(ThemeManager.getValue("cardView.textFields.textColor")))
+        cvcNumberEditText.setHintTextColor(Color.parseColor(ThemeManager.getValue("cardView.textFields.placeholderColor")))
+        cvcNumberEditText.setTextColor(Color.parseColor(ThemeManager.getValue("cardView.textFields.textColor")))
+        holderNameEditText.setHintTextColor(Color.parseColor(ThemeManager.getValue("cardView.textFields.placeholderColor")))
+        holderNameEditText.setTextColor(Color.parseColor(ThemeManager.getValue("cardView.textFields.textColor")))
+
+
+        cardNumberEditText.textSize = ThemeManager.getFontSize("cardView.textFields.font").toFloat()
+        holderNameEditText.textSize = ThemeManager.getFontSize("cardView.textFields.font").toFloat()
+        cvcNumberEditText.textSize = ThemeManager.getFontSize("cardView.textFields.font").toFloat()
+        expiryDateEditText.textSize = ThemeManager.getFontSize("cardView.textFields.font").toFloat()
+
+
+        checkBoxSaveCard.setTextColor(Color.parseColor(ThemeManager.getValue("cardView.saveLabel.textColor")))
+        checkBoxSaveCard.backgroundTintList=ContextCompat.getColorStateList(context,R.color.checkboxcolor)
+        checkBoxSaveCard.textSize = ThemeManager.getFontSize("cardView.saveLabel.font").toFloat()
+        //checkBoxSaveCard.typeface = ThemeManager.getFontName("cardView.saveLabel.font")
+
 
     }
 

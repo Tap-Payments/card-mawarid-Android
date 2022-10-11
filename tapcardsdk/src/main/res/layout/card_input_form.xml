@@ -123,7 +123,7 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:layout_marginTop="20dp"
-            android:buttonTint="@color/red_error"
+            android:buttonTint="@color/checkboxcolor"
             android:textColor="@color/red_error"
             android:layoutDirection="locale"
             tools:text="Save your Card For next transactions" />

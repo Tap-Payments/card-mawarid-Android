@@ -19,8 +19,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun themeLanguageLocalizations() {
 
-        ThemeManager.loadTapTheme(this.resources,R.raw.defaultlighttheme,"lighttheme")
-        ThemeManager.currentTheme = R.raw.defaultlighttheme.toString()
+        ThemeManager.loadTapTheme(this.resources,R.raw.defaultdarktheme,"darktheme")
+        ThemeManager.currentTheme = R.raw.defaultdarktheme.toString()
         LocalizationManager.loadTapLocale(this.resources,R.raw.cardlocalisation)
         LocalizationManager.setLocale(this, Locale("ar"))
     }

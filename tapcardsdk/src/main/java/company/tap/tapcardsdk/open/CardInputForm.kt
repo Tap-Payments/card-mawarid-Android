@@ -1407,7 +1407,7 @@ class CardInputForm @JvmOverloads constructor(
         )
        checkBoxSaveCard.typeface = Typeface.createFromAsset(
             context?.assets, TapFont.tapFontType(
-                TapFont.RobotoRegular
+                TapFont.TajawalRegular
             )
         )
        cardDetailsText.typeface = Typeface.createFromAsset(
@@ -1420,29 +1420,29 @@ class CardInputForm @JvmOverloads constructor(
     private  fun setFontsArabic() {
         cardNumberEditText.typeface = Typeface.createFromAsset(
             context?.assets, TapFont.tapFontType(
-                TapFont.TajawalMedium
+                TapFont.TajawalLight
             )
         )
 
         cvcNumberEditText.typeface = Typeface.createFromAsset(
             context?.assets, TapFont.tapFontType(
-                TapFont.TajawalMedium
+                TapFont.TajawalLight
             )
         )
 
         expiryDateEditText.typeface = Typeface.createFromAsset(
             context?.assets, TapFont.tapFontType(
-                TapFont.TajawalMedium
+                TapFont.TajawalLight
             )
         )
         holderNameEditText.typeface = Typeface.createFromAsset(
             context?.assets, TapFont.tapFontType(
-                TapFont.TajawalMedium
+                TapFont.TajawalLight
             )
         )
         checkBoxSaveCard.typeface = Typeface.createFromAsset(
             context?.assets, TapFont.tapFontType(
-                TapFont.TajawalMedium
+                TapFont.TajawalRegular
             )
         )
         cardDetailsText.typeface = Typeface.createFromAsset(

@@ -104,14 +104,16 @@
 
 
                 android:textDirection="locale" />
+
             <ImageView
                 android:id="@+id/date_picker_actions"
-                android:padding="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/expiry_date_edit_text"
-                android:layout_alignBottom="@+id/expiry_date_edit_text"
                 android:layout_alignRight="@+id/expiry_date_edit_text"
+                android:layout_alignBottom="@+id/expiry_date_edit_text"
+                android:padding="5dp"
+                android:layoutDirection="locale"
                 android:src="@drawable/ic_card" />
 
         </RelativeLayout>

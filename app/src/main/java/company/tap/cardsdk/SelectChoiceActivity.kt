@@ -122,7 +122,7 @@ class SelectChoiceActivity : AppCompatActivity() {
             intent.putExtra("selectedCurrency", selectedCurrency)
 
 
-            finish()
+
             startActivity(intent)
 
         } else{

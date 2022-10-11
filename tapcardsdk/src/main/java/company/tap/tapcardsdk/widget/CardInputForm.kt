@@ -68,10 +68,6 @@ class CardInputForm @JvmOverloads constructor(
 
 
 
-    private val cardNumberTextInputLayout = viewBinding.cardNumberTextInputLayout
-    private val expiryDateTextInputLayout = viewBinding.expiryDateTextInputLayout
-    private val cvcNumberTextInputLayout = viewBinding.cvcTextInputLayout
-    internal val holderNameTextInputLayout = viewBinding.holderNameTextInputLayout
 
     @JvmSynthetic
     internal val cardNumberEditText = viewBinding.cardNumberEditText

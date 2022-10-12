@@ -43,11 +43,6 @@ internal interface BaseCardInput {
     fun setCvcNumberTextWatcher(cvcNumberTextWatcher: TextWatcher?)
 
     /**
-     * Set a `setSwitchSaveCardListener value changes.
-     */
-    fun setSwitchSaveCardListener(switchListener: CompoundButton.OnCheckedChangeListener?)
-
-    /**
      * Set a `TextWatcher` to receive postal code changes.
      */
     fun setHolderNameTextWatcher(holderNameTextWatcher: TextWatcher?)

@@ -1,14 +1,11 @@
 package company.tap.tapcardsdk.open
 
-import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.content.Context
 import android.content.res.ColorStateList
 import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.Typeface
-import android.icu.text.SimpleDateFormat
-import android.os.Build
 import android.os.Bundle
 import android.os.Parcelable
 import android.text.*
@@ -39,7 +36,6 @@ import company.tap.tapcardsdk.internal.ui.`interface`.CardValidCallback
 import company.tap.tapcardsdk.internal.ui.brandtypes.Card
 import company.tap.tapcardsdk.internal.ui.brandtypes.CardBrand
 import company.tap.tapcardsdk.internal.ui.brandtypes.CardBrandSingle
-import company.tap.tapcardsdk.internal.ui.brandtypes.CardInputUIStatus
 import company.tap.tapcardsdk.internal.ui.utils.DateUtils
 import company.tap.tapcardsdk.internal.ui.utils.TextValidator
 import company.tap.tapcardsdk.internal.ui.views.CardNumberEditText
@@ -49,7 +45,6 @@ import company.tap.tapuilibrary.fontskit.enums.TapFont
 import company.tap.tapuilibrary.themekit.ThemeManager
 import company.tap.tapuilibrary.uikit.atoms.TapTextInput
 import company.tap.tapuilibrary.uikit.utils.TapTextWatcher
-import company.tap.tapuilibrary.uikit.views.TapAlertView
 import java.util.*
 import kotlin.properties.Delegates
 
@@ -70,10 +65,7 @@ class CardInputForm @JvmOverloads constructor(
             this,true
     )
 
-  //  private val containerLayout1 = viewBinding.container1
     private val containerLayout = viewBinding.container
-
-
 
 
     @JvmSynthetic
@@ -93,13 +85,9 @@ class CardInputForm @JvmOverloads constructor(
 
     private var cardInputListener: CardInputListener? = null
     private var cardValidCallback: CardValidCallback? = null
-    lateinit var alertView :TapAlertView
     val cardDetailsText = viewBinding.cardDetailsText
     val datePicker = viewBinding.datePickerActions
-    lateinit var nfcButton :ImageView
-    lateinit var scannerButton :ImageView
-    lateinit var closeButton :ImageView
-    lateinit var linearIconsLayout :LinearLayout
+
     private var cardNumber: String? = null
     private var cardHolderName: String? = "CARD HOLDER NAME"
     private var expiryDate: String? = null
@@ -350,13 +338,7 @@ class CardInputForm @JvmOverloads constructor(
     var checkedSaveCardEnabled: Boolean by Delegates.observable(
         BaseCardInput.DEFAULT_SWITCH
     ) { _, _, isEnabled ->
-          if (isEnabled) {
-            //  mainSwitchInline.visibility = View.VISIBLE
 
-          } else {
-              //mainSwitchInline.visibility = View.GONE
-
-          }
     }
 
 
@@ -368,7 +350,6 @@ class CardInputForm @JvmOverloads constructor(
     override fun setCardNumber(cardNumber: String?) {
         println("setCardNumber value>>>"+cardNumber)
         cardNumberEditText.setText(cardNumber)
-       // println("maskCardNumber>>>"+maskCardNumber(fieldText))
         this.cardNumberIsViewed = !cardNumberEditText.isCardNumberValid
     }
 
@@ -418,7 +399,6 @@ class CardInputForm @JvmOverloads constructor(
      * @param cvcCode the CVC value to be set
      */
     override fun setCvcCode(cvcCode: String?) {
-      //  cvcNumberEditText.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
         cvcNumberEditText.setText(cvcCode)
     }
 
@@ -444,8 +424,6 @@ class CardInputForm @JvmOverloads constructor(
         cvcNumberEditText.isEnabled = true
         expiryDateEditText.isEnabled = true
 
-        nfcButton.visibility= View.VISIBLE
-        scannerButton.visibility= View.VISIBLE
     }
 
     /**
@@ -481,14 +459,7 @@ class CardInputForm @JvmOverloads constructor(
      * Set a `TextWatcher` to receive CVC value changes.
      */
     override fun setCvcNumberTextWatcher(cvcNumberTextWatcher: TextWatcher?) {
-      //  cvcNumberEditText.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
         cvcNumberEditText.addTextChangedListener(cvcNumberTextWatcher)
-    }
-    /**
-     * Set a `Delegate` to receive switch changes.
-     */
-    override fun setSwitchSaveCardListener(switchListener: CompoundButton.OnCheckedChangeListener?) {
-       //mainSwitchInline.switchSaveCard?.setOnCheckedChangeListener(switchListener)
     }
 
     /**
@@ -509,7 +480,7 @@ class CardInputForm @JvmOverloads constructor(
         return requiredFields.all { it.isEnabled }
     }
 
-    override fun onInterceptTouchEvent(ev: MotionEvent): Boolean {
+/*    override fun onInterceptTouchEvent(ev: MotionEvent): Boolean {
         if (ev.action != MotionEvent.ACTION_DOWN) {
             return super.onInterceptTouchEvent(ev)
         }
@@ -518,7 +489,7 @@ class CardInputForm @JvmOverloads constructor(
             it.requestFocus()
             true
         } ?: super.onInterceptTouchEvent(ev)
-    }
+    }*/
 
     override fun onSaveInstanceState(): Parcelable {
         return Bundle().apply {
@@ -533,85 +504,11 @@ class CardInputForm @JvmOverloads constructor(
 
     }
 
-    /**
-     * Checks on the horizontal position of a touch event to see if
-     * that event needs to be associated with one of the controls even
-     * without having actually touched it. This essentially gives a larger
-     * touch surface to the controls. We return `null` if the user touches
-     * actually inside the widget because no interception is necessary - the touch will
-     * naturally give focus to that control, and we don't want to interfere with what
-     * Android will naturally do in response to that touch.
-     *
-     * @param touchX distance in pixels from the start side of this control
-     * @return a [TapEditText] that needs to request focus, or `null`
-     * if no such request is necessary.
-     */
-    @VisibleForTesting
-    internal fun getFocusRequestOnTouch(touchX: Int): View? {
-        //check this as it was constraint.left
-        val frameStart :Int= this.frameStart
-        println("cardNumberIsViewed >>>"+cardNumberIsViewed)
-        return when {
-            cardNumberIsViewed -> {
-                // Then our view is
-                // |CARDVIEW||space||DATEVIEW|
-
-                when {
-                    touchX < frameStart + placementParameters.cardWidth -> // Then the card edit view will already handle this touch.
-                        null
-                    touchX < placementParameters.cardTouchBufferLimit -> // Then we want to act like this was a touch on the card view
-                        cardNumberEditText
-                    touchX < placementParameters.dateStartPosition -> // Then we act like this was a touch on the date editor.
-                        expiryDateEditText
-                    touchX < placementParameters.cvcStartPosition -> // We need to act like this was a touch on the cvc editor.
-                        cvcNumberEditText
-                    else -> // Then the date editor will already handle this touch.
-                        null
-                }
-            }
-
-            else -> {
-              //  println("else block called"+placementParameters.cvcStartPosition)
-               // println("else block called"+placementParameters.dateStartPosition)
-              //  println("else block called"+placementParameters.dateEndTouchBufferLimit)
-              //  println("else block called"+touchX)
-                // Our view is
-                // |PEEK||space||DATE||space||CVC|
-                when {
-                    touchX < frameStart + placementParameters.peekCardWidth -> // This was a touch on the card number editor, so we don't need to handle it.
-                        null
-                    touchX <placementParameters.cardTouchBufferLimit -> // Then we need to act like the user touched the card editor
-                        cardNumberEditText
-                    touchX < placementParameters.dateStartPosition-> // Then we need to act like this was a touch on the date editor
-                        expiryDateEditText
-                  touchX < placementParameters.dateStartPosition + placementParameters.dateWidth -> // Just a regular touch on the date editor.
-                       null
-                   touchX < placementParameters.dateEndTouchBufferLimit -> // We need to act like this was a touch on the date editor
-                       null
-                    touchX < placementParameters.cvcStartPosition   -> // We need to act like this was a touch on the cvc editor.
-                        cvcNumberEditText
-                    else -> null
-                }
-            }
-        }
-    }
 
 
-
-    private fun updateFieldLayout(view: View, width: Int, marginStart: Int) {
-        view.layoutParams = (view.layoutParams as LinearLayout.LayoutParams).apply {
-            this.width = width
-            this.marginStart = marginStart
-        }
-    }
-
-    private fun getDesiredWidthInPixels(text: String, editText: TapTextInput): Int {
-        return layoutWidthCalculator.calculate(text, editText.paint)
-    }
 
     private fun initView(attrs: AttributeSet?) {
         attrs?.let { applyAttributes(it) }
-        //backArrow.visibility = View.GONE
         ViewCompat.setAccessibilityDelegate(
                 cardNumberEditText,
                 object : AccessibilityDelegateCompat() {

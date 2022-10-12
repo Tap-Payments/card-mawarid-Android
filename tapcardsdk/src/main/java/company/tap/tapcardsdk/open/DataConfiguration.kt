@@ -100,8 +100,8 @@ object DataConfiguration  {
      */
 
     @RequiresApi(Build.VERSION_CODES.N)
-    fun startTokenize(tapCardInputView: CardInputForm, activity: AppCompatActivity) {
-            startTokenizingCard(tapCardInputView,activity)
+    fun startTokenize(cardInputForm: CardInputForm, activity: AppCompatActivity) {
+            startTokenizingCard(cardInputForm,activity)
 
     }
 
@@ -185,12 +185,7 @@ object DataConfiguration  {
         PaymentDataSource.setSelectedCurrency(dataConfig.selectedCurrency)
       //  PaymentDataSource.setCardType(dataConfig.selectedCardType)
 
-        if(dataConfig.defaultCardHolderName == "null"){
-           PaymentDataSource.setDefaultCardHolderName("")
-        }else{
-            dataConfig.defaultCardHolderName.let { PaymentDataSource.setDefaultCardHolderName(it) }
 
-        }
         tapCardInputView.visibility = View.GONE
         NetworkApp.initNetwork(
             context,
@@ -227,15 +222,6 @@ object DataConfiguration  {
            return ErrorTypes.CONNECTIVITY_MANAGER_ERROR
        }*/
 
-    fun setDefaultBorderColor(_defaultScannerBorderColor : Int){
-        //Set the frame color of your choice
-        // FrameManager.getInstance().frameColor = defaultScannerBorderColor
-        defaultScannerBorderColor = _defaultScannerBorderColor
 
-    }
-
-    fun getDefaultBorderColor() : Int? {
-        return defaultScannerBorderColor
-    }
 
 }

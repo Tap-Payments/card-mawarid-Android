@@ -98,10 +98,10 @@ class CardViewModel : ViewModel() {
     }
 
         @RequiresApi(Build.VERSION_CODES.N)
-        private fun createTokenWithEncryptedCard(createTokenWithEncryptedDataRequest: CreateTokenCard?, tapCardInputView:CardInputForm?, activity: AppCompatActivity?) {
+        private fun createTokenWithEncryptedCard(createTokenWithEncryptedDataRequest: CreateTokenCard?, cardInputForm:CardInputForm?, activity: AppCompatActivity?) {
             //  println("createTokenWithEncryptedDataRequest>>."+createTokenWithEncryptedDataRequest)
           //  if (createTokenWithEncryptedDataRequest != null) {
-                repository.createTokenWithEncryptedCard(createTokenWithEncryptedDataRequest, tapCardInputView,activity)
+                repository.createTokenWithEncryptedCard(createTokenWithEncryptedDataRequest, cardInputForm,activity)
          //   }
 
         }

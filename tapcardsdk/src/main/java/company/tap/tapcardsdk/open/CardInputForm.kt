@@ -347,7 +347,7 @@ class CardInputForm @JvmOverloads constructor(
      * The switchCardEnabled field is disabled by default. Will be enabled from parent class
      * on cardform completeion
      */
-    var switchCardEnabled: Boolean by Delegates.observable(
+    var checkedSaveCardEnabled: Boolean by Delegates.observable(
         BaseCardInput.DEFAULT_SWITCH
     ) { _, _, isEnabled ->
           if (isEnabled) {
@@ -422,27 +422,7 @@ class CardInputForm @JvmOverloads constructor(
         cvcNumberEditText.setText(cvcCode)
     }
 
-    @SuppressLint("SetTextI18n")
-    override fun setSavedCardDetails(cardDetails: Any?, cardInputUIStatus: CardInputUIStatus) {
-        cardDetails as Card
-        initFlag = true
-        cardNumberIsViewed = false
-       // onTouchHandling()
-        cvcNumberEditText.requestFocus()
-        cvcNumberEditText.setHint("Enter CVV")
-       // cvcNumberEditText.getBackground().setColorFilter(getResources().getColor(R.color.red_error), PorterDuff.Mode.SRC_ATOP)
-        cvcNumberEditText.isEnabled = true
 
-
-        cardNumberEditText.setText(cardDetails.number.toString())
-        cardNumberEditText.isEnabled = false
-        expiryDateEditText.setText(cardDetails.expMonth.toString()+"/"+cardDetails?.expYear.toString())
-        expiryDateEditText.isEnabled = false
-
-        nfcButton.visibility= View.GONE
-        scannerButton.visibility= View.GONE
-
-    }
 
     @JvmSynthetic
     internal fun setHolderName(holderName: String?) {
@@ -846,7 +826,9 @@ class CardInputForm @JvmOverloads constructor(
         checkBoxSaveCard.backgroundTintList = ColorStateList.valueOf(Color.parseColor(ThemeManager.getValue("cardView.saveLabel.textColor")))
         checkBoxSaveCard.textSize = ThemeManager.getFontSize("cardView.saveLabel.font").toFloat()
         if (context?.let { LocalizationManager.getLocale(it).language } == "en") setFontsEnglish() else setFontsArabic()
-
+        checkBoxSaveCard.setOnCheckedChangeListener { buttonView, isChecked ->
+            checkedSaveCardEnabled = isChecked
+        }
 
     }
 

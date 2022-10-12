@@ -4,24 +4,18 @@
  * All rights reserved.
  */
 
-package company.tap.cardsdk
+package company.tap.cardsdk.activities
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.SwitchCompat
 import com.google.android.material.button.MaterialButtonToggleGroup
-import com.google.android.material.textfield.TextInputEditText
-
-import company.tap.tapcardformkit.open.enums.CardType
-import kotlin.properties.Delegates
+import company.tap.cardsdk.R
+import company.tap.cardsdk.customer.CustomerActivity
 
 class SelectChoiceActivity : AppCompatActivity() {
 

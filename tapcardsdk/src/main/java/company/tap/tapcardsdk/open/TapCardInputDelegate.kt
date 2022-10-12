@@ -15,7 +15,7 @@ interface TapCardInputDelegate {
     /**
      * CallBack of  cardTokenizedSuccessfully returns @param token.
      **/
-    fun cardTokenizedSuccessfully(token: Token)
+    fun cardTokenizedSuccessfully(token: Token , saveCardEnabled:Boolean)
     /**
      * CallBack of  cardTokenizedFailed returns @param goSellError.
      **/

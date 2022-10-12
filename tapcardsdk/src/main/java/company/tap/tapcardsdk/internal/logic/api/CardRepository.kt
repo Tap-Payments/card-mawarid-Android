@@ -135,7 +135,7 @@ class CardRepository : APIRequestCallback , WebViewContract {
     fun createTokenWithEncryptedCard(
 
         createTokenWithCardDataRequest: CreateTokenCard?,
-        tapCardInputView: CardInputForm?, activity: AppCompatActivity?
+        cardInputForm: CardInputForm?, activity: AppCompatActivity?
     ) {
         this.activity = activity
         val createTokenWithCardDataReq = createTokenWithCardDataRequest?.let {
@@ -148,8 +148,8 @@ class CardRepository : APIRequestCallback , WebViewContract {
             TapMethodType.POST, ApiService.TOKEN, jsonString,
             this, CREATE_TOKEN_CODE
         )
-        if (tapCardInputView != null) {
-            this._tapCardInputView = tapCardInputView
+        if (cardInputForm != null) {
+            this._tapCardInputView = cardInputForm
         }
     }
 
@@ -235,7 +235,7 @@ class CardRepository : APIRequestCallback , WebViewContract {
                 if(PaymentDataSource.getTransactionMode() == TransactionMode.SAVE_CARD){
                     createSaveCard(null,tokenResponse.id)
                 }else{
-                    tokenizeParams.getListener()?.cardTokenizedSuccessfully(tokenResponse)
+                    tokenizeParams.getListener()?.cardTokenizedSuccessfully(tokenResponse ,_tapCardInputView.checkedSaveCardEnabled )
                   //  _tapCardInputView.clearCardInputAction()
 
                 }

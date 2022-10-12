@@ -1,4 +1,4 @@
-package company.tap.cardsdk
+package company.tap.cardsdk.activities
 
 import android.content.DialogInterface
 import android.os.Build
@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
+import company.tap.cardsdk.R
 import company.tap.tapcardformkit.open.SdkMode
 import company.tap.tapcardsdk.internal.logic.api.models.Charge
 import company.tap.tapcardsdk.internal.logic.api.models.TapCardDataConfiguration
@@ -15,7 +16,6 @@ import company.tap.tapcardsdk.open.CardInputForm
 import company.tap.tapcardsdk.open.DataConfiguration
 import company.tap.tapcardsdk.open.TapCardInputDelegate
 import company.tap.tapnetworkkit.exception.GoSellError
-import java.util.*
 
 class MainActivity : AppCompatActivity() , TapCardInputDelegate {
 
@@ -66,11 +66,11 @@ class MainActivity : AppCompatActivity() , TapCardInputDelegate {
         selectedTheme: String
 
     ) {
-        if(selectedTheme!=null && selectedTheme.contains("darktheme")){
+        if(selectedTheme.contains("darktheme")){
             dataConfiguration.setTheme(this, resources, null,
                 R.raw.defaultdarktheme, selectedTheme)
 
-        } else if(selectedTheme!=null && selectedTheme.contains("lighttheme")){
+        } else if(selectedTheme.contains("lighttheme")){
             dataConfiguration.setTheme(this, resources, null,
                 R.raw.defaultlighttheme, selectedTheme)
 
@@ -80,13 +80,14 @@ class MainActivity : AppCompatActivity() , TapCardInputDelegate {
 
     }
 
-    override fun cardTokenizedSuccessfully(token: Token) {
+    override fun cardTokenizedSuccessfully(token: Token, saveCardEnabled:Boolean) {
         println("Card Tokenized Succeeded : ")
         println("Token card : " + token.card?.firstSix.toString() + " **** " + token.card?.lastFour)
         println("Token card : " + token.card?.fingerprint.toString() + " **** " + token.card?.funding)
         println("Token card : " + token.card?.id.toString() + " ****** " + token.card?.name)
         println("Token card : " + token.card?.address.toString() + " ****** " + token.card?.`object`)
         println("Token card : " + token.card?.expirationMonth.toString() + " ****** " + token.card?.expirationYear)
+        println("Token card saveCardEnabled : " + saveCardEnabled)
         showDialogAlert("cardTokenizedSuccessfully","token is >> "+ token.id)
     }
 

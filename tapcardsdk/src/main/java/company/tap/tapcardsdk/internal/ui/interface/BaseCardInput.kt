@@ -70,10 +70,6 @@ internal interface BaseCardInput {
 
     fun setCvcCode(cvcCode: String?)
 
-    /**
-     * Interface method to collect data from parent to show pre-filled UI
-     */
-    fun setSavedCardDetails(cardDetails:Any?,cardInputUIStatus: CardInputUIStatus)
 
     companion object {
         internal const val DEFAULT_HOLDER_NAME_ENABLED = false

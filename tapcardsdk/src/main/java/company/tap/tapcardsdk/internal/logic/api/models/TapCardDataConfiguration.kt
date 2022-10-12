@@ -38,10 +38,4 @@ data class TapCardDataConfiguration(
     @Expose
     var selectedCurrency: String? = null,
 
-    @SerializedName("selectedCardType")
-    @Expose
-    var selectedCardType: String? =null,
-    @SerializedName("defaultCardHolderName")
-    @Expose
-    var defaultCardHolderName: String= "CARD HOLDER NAME",
 ):Serializable, BaseResponse

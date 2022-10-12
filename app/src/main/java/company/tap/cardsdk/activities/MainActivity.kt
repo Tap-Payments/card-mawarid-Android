@@ -110,6 +110,9 @@ class MainActivity : AppCompatActivity() , TapCardInputDelegate {
 
     }
 
+    override fun saveCardSelected(saveCardEnabled: Boolean) {
+        println(" user has selected to saveCardSelected$saveCardEnabled")
+    }
 
 
     private fun showDialogAlert(title : String? ,message: String?){

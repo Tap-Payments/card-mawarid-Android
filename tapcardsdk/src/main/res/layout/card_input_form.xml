@@ -87,13 +87,13 @@
 
             <company.tap.tapcardsdk.internal.ui.views.ExpiryDateEditText
                 android:id="@+id/expiry_date_edit_text"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_gravity="start"
-                android:background="@drawable/edittext_background"
+                android:layout_marginLeft="5dp"
                 android:layout_marginTop="20dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/edittext_background"
                 android:fontFamily="sans-serif-light"
                 android:gravity="start|end"
                 android:hint="@string/expiry_date_hint"
@@ -139,6 +139,7 @@
             android:inputType="textPassword"
             android:textAlignment="viewStart"
             android:layoutDirection="locale"
+            android:enabled="false"
             android:textDirection="locale" />
 
         <CheckBox

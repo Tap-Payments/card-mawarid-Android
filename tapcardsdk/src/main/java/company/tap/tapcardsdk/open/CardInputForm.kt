@@ -643,6 +643,11 @@ class CardInputForm @JvmOverloads constructor(
             cardNumber = cardNumberEditText.cardNumber
            // scrollEnd()
             cardInputListener?.onCardComplete()
+
+            if(cardNumberEditText.isCardNumberValid){
+                cvcNumberEditText.isEnabled = true
+            }
+
         }
 
         cardNumberEditText.brandChangeCallback = { brand ->

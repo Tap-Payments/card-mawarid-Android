@@ -744,6 +744,7 @@ class CardInputForm @JvmOverloads constructor(
         day_of_month = calendar.get(Calendar.DAY_OF_MONTH)
        calendar.set(year!!, month!!, day_of_month!!)
 
+       //Note hiding date works only with Theme_Holo_Dialog style
        val dpd = DatePickerDialog(
            context,
            android.R.style.Theme_Holo_Dialog,
@@ -764,8 +765,9 @@ class CardInputForm @JvmOverloads constructor(
 
            }, year!!, month!!, day_of_month!!
        )
-     //  dpd.datePicker.calendarViewShown= false
+
        dpd.show()
+       //Work around to hide day from datepicker
        val dayPicker = dpd.datePicker.findViewById<View>(Resources.getSystem().getIdentifier("android:id/day", null, null))
 
        if (dayPicker != null) {

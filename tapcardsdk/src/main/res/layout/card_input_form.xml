@@ -38,6 +38,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:padding="5dp"
+                android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZ. "
                 android:background="@drawable/edittext_background"
                 android:textDirection="locale"/>
 

@@ -760,14 +760,14 @@ class CardInputForm @JvmOverloads constructor(
                }else monthVal = month.toString()
 
                if(::monthVal.isInitialized)
-               expiryDateEditText.setText ("$monthVal/$yearVal")
+               expiryDateEditText.setText ("$monthVal/$year")
 
            }, year!!, month!!, day_of_month!!
        )
      //  dpd.datePicker.calendarViewShown= false
        dpd.show()
        val dayPicker = dpd.datePicker.findViewById<View>(Resources.getSystem().getIdentifier("android:id/day", null, null))
-     //  println("daytt"+dayPicker)
+
        if (dayPicker != null) {
            dayPicker.visibility = View.GONE
        }

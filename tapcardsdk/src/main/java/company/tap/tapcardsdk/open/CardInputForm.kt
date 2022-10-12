@@ -884,24 +884,6 @@ class CardInputForm @JvmOverloads constructor(
 
 
 
-
-    //update month day year
-    private fun updateDisplay(year: Int, month: Int)
-    {
-
-        expiryDateEditText.setText(//this is the edit text where you want to show the selected date
-            StringBuilder().append(month+1).append("/").append(year)
-                // Month is 0 based so add 1
-
-
-        )
-
-
-        //.append(mMonth + 1).append("-")
-        //.append(mDay).append("-")
-        //.append(mYear).append(" "));
-    }
-
     private fun initLocals() {
         val holderNameHint :String = LocalizationManager.getValue("cardNamePlaceholder","cardForm")
         val cardNumberHint :String = LocalizationManager.getValue("cardNumberPlaceholder","cardForm")

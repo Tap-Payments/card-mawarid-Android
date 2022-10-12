@@ -725,7 +725,7 @@ class CardInputForm @JvmOverloads constructor(
 
 
         checkBoxSaveCard.setTextColor(Color.parseColor(ThemeManager.getValue("cardView.saveLabel.textColor")))
-        checkBoxSaveCard.backgroundTintList = ColorStateList.valueOf(Color.parseColor(ThemeManager.getValue("cardView.saveLabel.textColor")))
+       // checkBoxSaveCard.backgroundTintList = ColorStateList.valueOf(Color.parseColor(ThemeManager.getValue("cardView.saveLabel.textColor")))
         checkBoxSaveCard.textSize = ThemeManager.getFontSize("cardView.saveLabel.font").toFloat()
         if (context?.let { LocalizationManager.getLocale(it).language } == "en") setFontsEnglish() else setFontsArabic()
         checkBoxSaveCard.setOnCheckedChangeListener { buttonView, isChecked ->

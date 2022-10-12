@@ -89,6 +89,6 @@ class HolderNameEditText @JvmOverloads constructor(
 
 
     private companion object {
-        private const val MAX_LENGTH = 22
+        private const val MAX_LENGTH = 26
     }
 }

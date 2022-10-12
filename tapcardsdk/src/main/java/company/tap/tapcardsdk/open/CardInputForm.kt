@@ -6,15 +6,13 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.Typeface
+import android.icu.text.SimpleDateFormat
 import android.os.Build
 import android.os.Bundle
 import android.os.Parcelable
 import android.text.*
 import android.util.AttributeSet
-import android.view.KeyEvent
-import android.view.LayoutInflater
-import android.view.MotionEvent
-import android.view.View
+import android.view.*
 import android.view.View.OnFocusChangeListener
 import android.view.animation.Animation
 import android.view.animation.Transformation
@@ -24,15 +22,12 @@ import androidx.annotation.ColorInt
 import androidx.annotation.IdRes
 import androidx.annotation.IntRange
 import androidx.annotation.VisibleForTesting
-import androidx.core.content.ContextCompat
 import androidx.core.view.AccessibilityDelegateCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.accessibility.AccessibilityNodeInfoCompat
 import company.tap.tapcardsdk.R
-
-import company.tap.tapcardsdk.internal.ui.utils.DateUtils
-import company.tap.tapcardsdk.internal.ui.utils.TextValidator
-import company.tap.tapcardsdk.internal.ui.views.CardNumberEditText
+import company.tap.tapcardsdk.databinding.CardInputFormBinding
+import company.tap.tapcardsdk.internal.logic.api.models.CreateTokenCard
 import company.tap.tapcardsdk.internal.ui.`interface`.BaseCardInput
 import company.tap.tapcardsdk.internal.ui.`interface`.CardInputListener
 import company.tap.tapcardsdk.internal.ui.`interface`.CardInputListener.FocusField.Companion.FOCUS_CARD
@@ -44,19 +39,17 @@ import company.tap.tapcardsdk.internal.ui.brandtypes.Card
 import company.tap.tapcardsdk.internal.ui.brandtypes.CardBrand
 import company.tap.tapcardsdk.internal.ui.brandtypes.CardBrandSingle
 import company.tap.tapcardsdk.internal.ui.brandtypes.CardInputUIStatus
-import company.tap.tapcardsdk.databinding.CardInputFormBinding
-import company.tap.tapcardsdk.internal.logic.api.models.CreateTokenCard
+import company.tap.tapcardsdk.internal.ui.utils.DateUtils
+import company.tap.tapcardsdk.internal.ui.utils.TextValidator
+import company.tap.tapcardsdk.internal.ui.views.CardNumberEditText
 import company.tap.tapcardsdk.internal.ui.widget.BackUpFieldDeleteListener
 import company.tap.taplocalizationkit.LocalizationManager
 import company.tap.tapuilibrary.fontskit.enums.TapFont
 import company.tap.tapuilibrary.themekit.ThemeManager
-import company.tap.tapuilibrary.themekit.theme.TextViewTheme
 import company.tap.tapuilibrary.uikit.atoms.TapTextInput
 import company.tap.tapuilibrary.uikit.utils.TapTextWatcher
 import company.tap.tapuilibrary.uikit.views.TapAlertView
-import java.text.SimpleDateFormat
 import java.util.*
-import javax.xml.datatype.DatatypeConstants.MONTHS
 import kotlin.properties.Delegates
 
 /**
@@ -70,7 +63,7 @@ class CardInputForm @JvmOverloads constructor(
         attrs: AttributeSet? = null,
         defStyleAttr: Int = 0
 ) : LinearLayout(context, attrs, defStyleAttr),
-    BaseCardInput {
+    BaseCardInput{
     private val viewBinding = CardInputFormBinding.inflate(
             LayoutInflater.from(context),
             this,true
@@ -110,6 +103,10 @@ class CardInputForm @JvmOverloads constructor(
     private var cardHolderName: String? = "CARD HOLDER NAME"
     private var expiryDate: String? = null
     private var cvvNumber: String? = null
+    private var day_of_month: Int? = null
+    private var year: Int? = null
+    private var month: Int? = null
+    lateinit var monthVal:String
 
     private val frameStart: Int
         get() {
@@ -849,31 +846,60 @@ class CardInputForm @JvmOverloads constructor(
         checkBoxSaveCard.textSize = ThemeManager.getFontSize("cardView.saveLabel.font").toFloat()
         if (context?.let { LocalizationManager.getLocale(it).language } == "en") setFontsEnglish() else setFontsArabic()
 
+
     }
 
    private fun datePickerAction(){
-        val c = Calendar.getInstance()
-        val year = c.get(Calendar.YEAR)
-        val month = c.get(Calendar.MONTH)
-        val day = c.get(Calendar.DAY_OF_MONTH)
 
 
-        val dpd = DatePickerDialog(context, DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-            val myFormat = "MM/YY" // mention the format you need
-            val sdf = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                SimpleDateFormat(myFormat, Locale.US)
-            } else {
-                TODO("VERSION.SDK_INT < N")
-            }
+       val calendar = Calendar.getInstance()
 
-            expiryDateEditText.setText(sdf.format(c.time) )
+        year = calendar.get(Calendar.YEAR)
+        month = calendar.get(Calendar.MONTH)
+        day_of_month = calendar.get(Calendar.DAY_OF_MONTH)
+       calendar.set(year!!, month!!, day_of_month!!)
 
-            // Display Selected date in textbox
-          //  expiryDateEditText.setText(month.toString()+ "/ " + year)
+       val dpd = DatePickerDialog(
+           context,
+           DatePickerDialog.OnDateSetListener { datePicker, selyear, monthOfYear, dayOfMonth ->
+               day_of_month = dayOfMonth
+               month = monthOfYear + 1
+               year = selyear
 
-        }, year, month, day)
+               val yearVal = selyear.toString().substring(2)
 
-        dpd.show()
+               if(month!! <10){
+                   monthVal = "0$month"
+               }else monthVal = month.toString()
+
+               if(::monthVal.isInitialized)
+               expiryDateEditText.setText ("$monthVal/$yearVal")
+
+           }, year!!, month!!, day_of_month!!
+       )
+
+       dpd.show()
+
+    }
+
+
+
+
+    //update month day year
+    private fun updateDisplay(year: Int, month: Int)
+    {
+
+        expiryDateEditText.setText(//this is the edit text where you want to show the selected date
+            StringBuilder().append(month+1).append("/").append(year)
+                // Month is 0 based so add 1
+
+
+        )
+
+
+        //.append(mMonth + 1).append("-")
+        //.append(mDay).append("-")
+        //.append(mYear).append(" "));
     }
 
     private fun initLocals() {
@@ -1452,6 +1478,8 @@ class CardInputForm @JvmOverloads constructor(
         )
 
     }
+
+
 
 
     }

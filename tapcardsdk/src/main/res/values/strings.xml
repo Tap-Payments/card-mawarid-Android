@@ -16,5 +16,7 @@
     <string name="holder_name_hint">Card Holder Name</string>
     <string name="invalid_holder_name">Holder name is incomplete</string>
     <string name="acc_label_holder_name">Holder name</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

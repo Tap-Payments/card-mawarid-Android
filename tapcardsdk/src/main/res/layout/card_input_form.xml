@@ -112,9 +112,9 @@
                 android:layout_alignTop="@+id/expiry_date_edit_text"
                 android:layout_alignRight="@+id/expiry_date_edit_text"
                 android:layout_alignBottom="@+id/expiry_date_edit_text"
-                android:padding="5dp"
                 android:layoutDirection="locale"
-                android:src="@drawable/ic_card" />
+                android:padding="5dp"
+                android:src="@drawable/ic_date" />
 
         </RelativeLayout>
 

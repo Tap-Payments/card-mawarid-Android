@@ -12,6 +12,7 @@
         <entry key="tapcardsdk/src/main/res/layout/card_brand_view.xml" value="0.13229166666666667" />
         <entry key="tapcardsdk/src/main/res/layout/card_input_form.xml" value="0.5068267822265625" />
         <entry key="tapcardsdk/src/main/res/layout/card_input_widget.xml" value="0.14739583333333334" />
+        <entry key="tapcardsdk/src/main/res/layout/fragment_month_year_picker_dialog.xml" value="0.11458333333333333" />
       </map>
     </option>
   </component>

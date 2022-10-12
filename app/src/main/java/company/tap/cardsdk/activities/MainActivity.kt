@@ -114,6 +114,11 @@ class MainActivity : AppCompatActivity() , TapCardInputDelegate {
         println(" user has selected to saveCardSelected$saveCardEnabled")
     }
 
+    override fun cardFormDataIsValid(cardFormDataValid: Boolean) {
+        println("cardFormDataIsValid >>>>$cardFormDataValid")
+        println("You can tokenize now >>>>")
+    }
+
 
     private fun showDialogAlert(title : String? ,message: String?){
         val dialogBuilder = AlertDialog.Builder(this)

@@ -38,5 +38,10 @@ interface TapCardInputDelegate {
      **/
     fun saveCardSelected(saveCardEnabled: Boolean)
 
+    /**
+     * CallBack of scardFormDataIsValid
+     **/
+    fun cardFormDataIsValid(cardFormDataValid: Boolean)
+
     
 }

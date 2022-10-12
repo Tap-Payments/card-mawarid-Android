@@ -1,15 +1,15 @@
 {
     "en":{
         "cardForm": {
-            "title":"Please enter the card details",
-            "cardNamePlaceholder":"Card holder name",
-            "cardNumberPlaceholder":"Card number",
-            "cardExpiryPlaceholder":"Card expiry",
-            "cardCVVPlaceholder":"CVV",
-            "saveCard":"Save card for next transactions"
-        }
-
-    },
+            "title": "Please enter the card details",
+            "cardNamePlaceholder": "Card holder name",
+            "cardNumberPlaceholder": "Card number",
+            "cardExpiryPlaceholder": "Card expiry",
+            "cardCVVPlaceholder": "CVV",
+            "saveCard": "Save card for next transactions",
+            "cancel": "Cancel",
+            "done": "Done"
+        } },
     "ar":{
         "cardForm": {
             "title": "من فضلك أدخل بيانات البطاقة",
@@ -17,7 +17,9 @@
             "cardNumberPlaceholder": "رقم البطاقة",
             "cardExpiryPlaceholder": "تاريخ الإنتهاء",
             "cardCVVPlaceholder": "رمز الأمان",
-            "saveCard": "حفظ البطاقة للمعاملات القادمة"
-        }
-    }
+            "saveCard": "حفظ البطاقة للمعاملات القادمة",
+            "cancel": "إلغاء",
+            "done": "تم"
+        }  }
 }
+

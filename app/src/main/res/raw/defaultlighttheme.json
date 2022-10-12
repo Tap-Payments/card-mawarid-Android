@@ -22,6 +22,7 @@
         },
         "cardIcon":"card-icon"
     },
+
     "emailCard": {
         "textFields": {
             "textColor": "#4b4847",

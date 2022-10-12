@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.content.Context
 import android.content.res.ColorStateList
+import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.Typeface
 import android.icu.text.SimpleDateFormat
@@ -861,7 +862,9 @@ class CardInputForm @JvmOverloads constructor(
 
        val dpd = DatePickerDialog(
            context,
+           android.R.style.Theme_Holo_Dialog,
            DatePickerDialog.OnDateSetListener { datePicker, selyear, monthOfYear, dayOfMonth ->
+
                day_of_month = dayOfMonth
                month = monthOfYear + 1
                year = selyear
@@ -877,8 +880,15 @@ class CardInputForm @JvmOverloads constructor(
 
            }, year!!, month!!, day_of_month!!
        )
-
+     //  dpd.datePicker.calendarViewShown= false
        dpd.show()
+       val dayPicker = dpd.datePicker.findViewById<View>(Resources.getSystem().getIdentifier("android:id/day", null, null))
+     //  println("daytt"+dayPicker)
+       if (dayPicker != null) {
+           dayPicker.visibility = View.GONE
+       }
+
+
 
     }
 

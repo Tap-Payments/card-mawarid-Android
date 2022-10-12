@@ -1,8 +1,7 @@
-package company.tap.tapcardsdk.open
+package company.tap.tapcardsdk.internal.logic.api.models
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-import company.tap.tapcardsdk.internal.logic.api.models.PhoneNumber
 import java.io.Serializable
 
 /**

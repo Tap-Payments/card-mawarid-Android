@@ -6,10 +6,10 @@ import company.tap.tapcardsdk.internal.logic.api.responses.InitResponseModel
 import company.tap.tapcardsdk.internal.logic.api.responses.MerchantData
 import company.tap.tapcardformkit.open.SdkMode
 import company.tap.tapcardsdk.internal.logic.api.models.CardIssuer
-import company.tap.tapcardformkit.open.Receipt
-import company.tap.tapcardformkit.open.Reference
+import company.tap.tapcardsdk.internal.logic.api.models.Receipt
+import company.tap.tapcardsdk.internal.logic.api.models.Reference
 import company.tap.tapcardsdk.internal.logic.api.enums.TransactionMode
-import company.tap.tapcardsdk.open.TapCustomer
+import company.tap.tapcardsdk.internal.logic.api.models.TapCustomer
 
 /**
  * Created by AhlaamK on 3/23/22.

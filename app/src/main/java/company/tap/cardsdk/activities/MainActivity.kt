@@ -28,9 +28,7 @@ class MainActivity : AppCompatActivity() , TapCardInputDelegate {
         val selectedTheme:String = intent.getStringExtra("themeSelected").toString()
         val selectedCurrency:String = intent.getStringExtra("selectedCurrency").toString()
         logicToHandleThemeLanguageChange(selectedLanguage,selectedTheme)
-
         setContentView(R.layout.activity_main)
-
         cardInputForm = findViewById(R.id.cardInputForm)
 
         initializeForm(selectedLanguage,selectedTheme,selectedCurrency)
@@ -102,9 +100,6 @@ class MainActivity : AppCompatActivity() , TapCardInputDelegate {
         showDialogAlert("backendUnknownError" , "backendUnknownError" + message)
     }
 
-    override fun cardNotSupported(message: String?) {
-
-    }
 
     override fun cardFormIsGettingReady() {
         println("<<<<<<<<<<cardFormIsGettingReady>>>>>>>>>")
@@ -115,13 +110,7 @@ class MainActivity : AppCompatActivity() , TapCardInputDelegate {
 
     }
 
-    override fun cardSavedSuccessfully(saveCard: Charge) {
 
-    }
-
-    override fun cardSavingFailed(chargeError: Charge) {
-
-    }
 
     private fun showDialogAlert(title : String? ,message: String?){
         val dialogBuilder = AlertDialog.Builder(this)

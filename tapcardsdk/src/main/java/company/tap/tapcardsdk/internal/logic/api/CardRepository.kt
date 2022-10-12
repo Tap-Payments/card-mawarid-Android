@@ -26,12 +26,13 @@ import company.tap.tapcardsdk.internal.logic.interfaces.IPaymentDataProvider
 import company.tap.tapcardsdk.internal.logic.utils.Utils
 import company.tap.tapcardsdk.internal.logic.webview.WebViewActivity
 import company.tap.tapcardsdk.internal.logic.webview.WebViewContract
-import company.tap.tapcardformkit.open.*
 import company.tap.tapcardsdk.internal.logic.api.enums.*
 import company.tap.tapcardsdk.internal.logic.api.models.*
+import company.tap.tapcardsdk.internal.logic.api.models.Receipt
+import company.tap.tapcardsdk.internal.logic.api.models.Reference
 import company.tap.tapcardsdk.open.CardInputForm
 import company.tap.tapcardsdk.open.DataConfiguration
-import company.tap.tapcardsdk.open.TapCustomer
+import company.tap.tapcardsdk.internal.logic.api.models.TapCustomer
 import company.tap.tapnetworkkit.connection.NetworkApp
 import company.tap.tapnetworkkit.controller.NetworkController
 import company.tap.tapnetworkkit.enums.TapMethodType
@@ -223,7 +224,7 @@ class CardRepository : APIRequestCallback , WebViewContract {
                 saveCardResponse = Gson().fromJson(it, SaveCard::class.java)
                 println("saveCardResponse value is>>>>" + saveCardResponse.status.name)
                WebViewActivity().finishWebActivity()
-                DataConfiguration.getListener()?.cardSavedSuccessfully(saveCardResponse)
+              //  DataConfiguration.getListener()?.cardSavedSuccessfully(saveCardResponse)
 
             //    handleSaveCardResponse(saveCardResponse)
 
@@ -477,7 +478,7 @@ class CardRepository : APIRequestCallback , WebViewContract {
                     }
                 }
                 ChargeStatus.CAPTURED, ChargeStatus.AUTHORIZED, ChargeStatus.VALID -> try {
-                    DataConfiguration.getListener()?.cardSavedSuccessfully(saveCard)
+                   // DataConfiguration.getListener()?.cardSavedSuccessfully(saveCard)
 
                 } catch (e: java.lang.Exception) {
                     Log.d(
@@ -487,7 +488,7 @@ class CardRepository : APIRequestCallback , WebViewContract {
 
                 }
                 ChargeStatus.INVALID, ChargeStatus.FAILED, ChargeStatus.ABANDONED, ChargeStatus.CANCELLED, ChargeStatus.DECLINED, ChargeStatus.RESTRICTED -> try {
-                    DataConfiguration.getListener()?.cardSavingFailed(saveCard)
+                //    DataConfiguration.getListener()?.cardSavingFailed(saveCard)
                     /*viewModel?.handleSuccessFailureResponseButton(
                     "failure",
                     saveCard.authenticate,

@@ -10,7 +10,7 @@ import company.tap.cardsdk.customer.CustomerViewModel
 
 
 import company.tap.tapcardsdk.internal.logic.api.models.PhoneNumber
-import company.tap.tapcardsdk.open.TapCustomer
+import company.tap.tapcardsdk.internal.logic.api.models.TapCustomer
 import kotlin.collections.ArrayList
 
 /**

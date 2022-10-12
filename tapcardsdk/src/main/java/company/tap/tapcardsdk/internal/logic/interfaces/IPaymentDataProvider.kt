@@ -1,9 +1,9 @@
 package company.tap.tapcardsdk.internal.logic.interfaces
 
-import company.tap.tapcardformkit.open.Receipt
-import company.tap.tapcardformkit.open.Reference
+import company.tap.tapcardsdk.internal.logic.api.models.Receipt
+import company.tap.tapcardsdk.internal.logic.api.models.Reference
 import company.tap.tapcardsdk.internal.logic.api.models.CardIssuer
-import company.tap.tapcardsdk.open.TapCustomer
+import company.tap.tapcardsdk.internal.logic.api.models.TapCustomer
 
 import java.util.HashMap
 

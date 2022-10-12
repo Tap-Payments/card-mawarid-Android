@@ -10,12 +10,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 
-import company.tap.tapcardformkit.open.Receipt;
-import company.tap.tapcardformkit.open.Reference;
 import company.tap.tapcardsdk.internal.logic.api.responses.Merchant;
 import company.tap.tapcardsdk.internal.logic.interfaces.BaseResponse;
 import company.tap.tapcardsdk.internal.logic.api.enums.ChargeStatus;
-import company.tap.tapcardsdk.open.TapCustomer;
 
 
 //@RestrictTo(RestrictTo.Scope.LIBRARY)

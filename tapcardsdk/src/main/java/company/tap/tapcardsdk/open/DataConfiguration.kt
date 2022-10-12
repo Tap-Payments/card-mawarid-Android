@@ -2,24 +2,18 @@ package company.tap.tapcardsdk.open
 
 
 import android.annotation.SuppressLint
-import android.app.DatePickerDialog
 import android.content.Context
 import android.content.res.Resources
 import android.os.Build
 import android.view.View
-import android.widget.DatePicker
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import company.tap.tapcardformkit.open.Receipt
 import company.tap.tapcardsdk.R
 import company.tap.tapcardsdk.internal.logic.api.ApiService
 import company.tap.tapcardsdk.internal.logic.api.CardViewEvent
 import company.tap.tapcardsdk.internal.logic.api.CardViewModel
 import company.tap.tapcardsdk.internal.logic.api.enums.TransactionMode
-import company.tap.tapcardsdk.internal.logic.api.models.Config
-import company.tap.tapcardsdk.internal.logic.api.models.Gateway
-import company.tap.tapcardsdk.internal.logic.api.models.TapCardDataConfiguration
-import company.tap.tapcardsdk.internal.logic.api.models.TapConfigRequestModel
+import company.tap.tapcardsdk.internal.logic.api.models.*
 import company.tap.tapcardsdk.internal.logic.datamanagers.PaymentDataSource
 import company.tap.taplocalizationkit.LocalizationManager
 import company.tap.tapnetworkkit.connection.NetworkApp
@@ -111,7 +105,7 @@ object DataConfiguration  {
      */
 
     @RequiresApi(Build.VERSION_CODES.N)
-    fun startSaveCard(tapCardInputView: CardInputForm, tapCustomer: TapCustomer, activity: AppCompatActivity, require3DSWebview:Boolean) {
+   private fun startSaveCard(tapCardInputView: CardInputForm, tapCustomer: TapCustomer, activity: AppCompatActivity, require3DSWebview:Boolean) {
         startSavingCard(tapCardInputView,tapCustomer, activity,require3DSWebview)
 
     }

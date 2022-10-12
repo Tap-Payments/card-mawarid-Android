@@ -24,10 +24,7 @@ interface TapCardInputDelegate {
      * CallBack of  backendUnknownError returns @param errorMessage.
      **/
     fun backendUnknownError(message: String?)
-    /**
-     * CallBack of  cardNotSupported in case not allowed card is passed returns @param errorMessage.
-     **/
-    fun cardNotSupported(message: String?)
+
     /**
      * CallBack of  cardFormIsGettingReady.
      **/
@@ -36,13 +33,6 @@ interface TapCardInputDelegate {
      * CallBack of  cardFormIsReady.
      **/
     fun cardFormIsReady()
-    /**
-     * CallBack of  cardSavedSuccessfully returns @param saveCard.
-     **/
-    fun cardSavedSuccessfully(saveCard: Charge)
-    /**
-     * CallBack of  cardSavingFailed returns @param chargeError.
-     **/
-    fun cardSavingFailed(chargeError: Charge)
+
     
 }

@@ -87,7 +87,25 @@ Configuration code:
  */
 val dataConfiguration = TapCardDataConfiguration("sk_test_kovrMB0mupFJXfNZWx6Etg5y","company.tap.goSellSDKExample" ,null, SdkMode.SAND_BOX)
 ```
+### [](https://github.com/Tap-Payments/card-mawarid-Android-Android#SLC)Single line initialization
 
+- Drag and drop the `TapCardInputView` from the XML into your UI as follows:
+```kotlin
+ <company.tap.tapcardsdk.open.CardInputForm
+android:id="@+id/cardInputForm"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+/>
+
+```
+- Connect `CardInputForm` as follows:
+
+// Initialize the CardForm
+
+```kotlin
+dataConfiguration.addCardInputDelegate(this) //** Required ** Add Delegate
+dataConfiguration.initCardForm(this, dataConfig,cardInputForm)
+```
 
 
 

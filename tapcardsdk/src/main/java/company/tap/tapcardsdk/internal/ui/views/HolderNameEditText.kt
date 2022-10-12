@@ -34,7 +34,10 @@ class HolderNameEditText @JvmOverloads constructor(
 
         addTextChangedListener(object : TapTextWatcher() {
             override fun afterTextChanged(s: Editable?) {
-                shouldShowError = false
+                if(s!=null && s.length<=3){
+                    shouldShowError = true
+                }
+
                 completionCallback()
             }
         })

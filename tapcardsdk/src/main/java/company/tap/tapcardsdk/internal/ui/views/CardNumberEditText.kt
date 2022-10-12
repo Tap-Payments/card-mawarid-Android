@@ -212,7 +212,6 @@ class CardNumberEditText @JvmOverloads constructor(
                     }
                 } else {
                     isCardNumberValid = CardUtils.isValidCardNumber(fieldText)
-                    //Showing red color until card is valid -- made true
                     // Don't show errors if we aren't full-length.
                     shouldShowError = false
                     displayErrorCallback(false)

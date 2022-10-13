@@ -5,6 +5,7 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import company.tap.cardsdk.R
@@ -13,6 +14,7 @@ import company.tap.tapcardsdk.internal.logic.api.models.Charge
 import company.tap.tapcardsdk.internal.logic.api.models.TapCardDataConfiguration
 import company.tap.tapcardsdk.internal.logic.api.models.Token
 import company.tap.tapcardsdk.open.CardInputForm
+import company.tap.tapcardsdk.open.CardValidation
 import company.tap.tapcardsdk.open.DataConfiguration
 import company.tap.tapcardsdk.open.TapCardInputDelegate
 import company.tap.tapnetworkkit.exception.GoSellError
@@ -20,6 +22,7 @@ import company.tap.tapnetworkkit.exception.GoSellError
 class MainActivity : AppCompatActivity() , TapCardInputDelegate {
 
     lateinit var cardInputForm: CardInputForm
+    lateinit var cardDataStatus: TextView
     var dataConfiguration: DataConfiguration = DataConfiguration
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,7 +33,7 @@ class MainActivity : AppCompatActivity() , TapCardInputDelegate {
         logicToHandleThemeLanguageChange(selectedLanguage,selectedTheme)
         setContentView(R.layout.activity_main)
         cardInputForm = findViewById(R.id.cardInputForm)
-
+        cardDataStatus = findViewById(R.id.cardDataStatus)
         initializeForm(selectedLanguage,selectedTheme,selectedCurrency)
 
 
@@ -114,10 +117,10 @@ class MainActivity : AppCompatActivity() , TapCardInputDelegate {
         println(" user has selected to saveCardSelected$saveCardEnabled")
     }
 
-    override fun cardFormDataIsValid(cardFormDataValid: Boolean) {
-        println("cardFormDataIsValid >>>>$cardFormDataValid")
-        println("You can tokenize now >>>>")
+    override fun cardDataValidation(cardValidation: CardValidation) {
+        cardDataStatus.text = " Card Data Form >>>"+cardValidation
     }
+
 
 
     private fun showDialogAlert(title : String? ,message: String?){

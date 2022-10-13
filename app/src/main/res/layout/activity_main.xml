@@ -47,4 +47,12 @@ as you like"/>
        android:layout_alignParentEnd="true"
         android:onClick="saveCard"/>
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/cardDataStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:text="Card Data is"/>
+
 </LinearLayout>

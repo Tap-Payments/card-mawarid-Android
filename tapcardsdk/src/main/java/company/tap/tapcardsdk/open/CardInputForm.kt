@@ -568,6 +568,7 @@ class CardInputForm @JvmOverloads constructor(
             if (hasFocus) {
               //  scrollStart()
                 cardInputListener?.onFocusChange(FOCUS_CARD)
+                DataConfiguration.getListener()?.cardDataValidation(CardValidation.INVALID)
                // expiryDateEditText.visibility = View.VISIBLE
               //  cvcNumberEditText.visibility = View.VISIBLE
             }
@@ -577,7 +578,7 @@ class CardInputForm @JvmOverloads constructor(
             if (hasFocus) {
 
                 cardInputListener?.onFocusChange(FOCUS_EXPIRY)
-
+                DataConfiguration.getListener()?.cardDataValidation(CardValidation.INVALID)
             }
 
         }
@@ -620,7 +621,7 @@ class CardInputForm @JvmOverloads constructor(
                     override fun onTextChanged(text: String) {
                         if (brand.isMaxCvc(text)) {
                             cardInputListener?.onCvcComplete()
-                            DataConfiguration.getListener()?.cardFormDataIsValid(true)
+                            DataConfiguration.getListener()?.cardDataValidation(CardValidation.VALID)
 
                         }
                         updateIconCvc(cvcNumberEditText.hasFocus(), text)

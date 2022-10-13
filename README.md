@@ -106,6 +106,63 @@ android:layout_height="wrap_content"
 dataConfiguration.addCardInputDelegate(this) //** Required ** Add Delegate
 dataConfiguration.initCardForm(this, dataConfig,cardInputForm)
 ```
+## [](https://github.com/Tap-Payments/card-mawarid-Android-Androidt#custom-theme)Custom Theme
+
+We made sure that as an UI element, you can customize the look and feel of it to match your own app's UX. The `theme` is represented a `JSON` data used to render the elements in light and dark modes. If not passed, the default tap theme will be used.
+
+**Custom local theme**
+
+You can provide `CardInputForm` UI element with a custom local theme. The local theme will be in the form of a JSON file.
+
+```kotlin
+
+/**
+    Handles  the card forum engine with the required theme on demand. It takes below
+    - Parameter resources: The local resources required to handle theme //Optional
+    - Parameter urlString: The urlString to load theme from URL //Optional
+    - Parameter urlPathLocal: The local resources path required to handle theme
+    - Parameter fileName: The fileName to identify theme
+     */
+dataConfiguration.setTheme(context: Context?, resources: Resources?, urlString:String?, urlPathLocal: Int?, fileName:String?)
+```
+
+Things to note:
+
+- Make sure the file is in your project directory.
+
+- Light mode is mandatory.
+
+- Dark mode is optional, if not passed then light mode will be used in both display modes.
+
+
+
+### [](https://github.com/Tap-Payments/card-mawarid-Android#custom-localisation)Custom Localisation
+
+We made sure that as an UI element, you can customize the look and feel of it to match your own app's UX. The `localisation` is represented as a `JSON` data used to localise the elements in different locales. If not passed, the default tap localisation will be used.
+
+**Custom local & remote localisation**
+
+You can provide `CardInputForm` UI element with a custom local localisation. The local localisation will be in the form of a JSON file.
+
+
+Apply local/remote localisation:
+
+```kotlin
+    /**
+    Handles  the card forum engine with the required locale on demand. It takes below
+- Parameter resources: The local resources required to handle locale //Optional
+- Parameter languageString: The languageString to load locale as user choice URL //Optional
+- Parameter urlPathLocal: The local resources path required to handle locale
+-  Parameter urlString:  The urlString to load locale from URL //Optional
+ */
+dataConfiguration.setLocale (context: Context ,languageString: String,urlString: String?,resources: Resources?,urlPathLocal: Int?)
+```
+
+Things to note::
+
+- Make sure the file is in your project directory.
+
+- You can put in any locale you need by just adding an entry for the locale as it shows for AR & EN in [here](https://firebasestorage.googleapis.com/v0/b/tapcardcheckout.appspot.com/o/CustomLocalisation.json?alt=media&token=6ef4023a-7082-47f3-86da-e47731abf098)
 
 
 

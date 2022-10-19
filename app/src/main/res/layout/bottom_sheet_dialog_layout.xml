@@ -23,6 +23,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="invisible"
         android:text="@string/headingText"/>
 
     <company.tap.tapcardsdk.open.CardInputForm
@@ -36,6 +37,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_gravity="bottom"
+        android:visibility="gone"
         android:layout_marginTop="@dimen/margin_basic_15dp">
 
 
@@ -62,6 +64,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="start|end"
         android:layoutDirection="locale"
+        android:visibility="gone"
         android:text="Card Data is"/>
 
 </LinearLayout>

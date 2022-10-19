@@ -186,7 +186,7 @@ object DataConfiguration  {
             dataConfig.authToken,
             dataConfig.packageId,
             ApiService.BASE_URL,
-            "NATIVE")
+            "NATIVE",true)
         val requestModel =
             TapConfigRequestModel(dataConfig.authToken?.let {
                 Gateway(

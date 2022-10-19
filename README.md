@@ -164,5 +164,117 @@ Things to note::
 
 - You can put in any locale you need by just adding an entry for the locale as it shows for AR & EN in [here](https://firebasestorage.googleapis.com/v0/b/tapcardcheckout.appspot.com/o/CustomLocalisation.json?alt=media&token=6ef4023a-7082-47f3-86da-e47731abf098)
 
+### [](https://github.com/Tap-Payments/card-mawarid-Android#tapCardInputDelegate)TapCardInputDelegate
 
+**TapCardInputDelegate** is an interface which you may want to implement to receive cardformready/started/error/card saving status updates and update your user interface accordingly when payment window closes.
+Below are listed down all available callbacks:
 
+<a name="card_success_callback"></a>
+### Card Success Callback
+
+Notifies the receiver that payment has succeed.
+
+#### Declaration
+*Kotlin:*
+```kotlin
+- fun cardTokenizedSuccessfully(token: Token , saveCardEnabled:Boolean)
+```
+#### Arguments
+
+**token**: Successful token object.
+
+<a name="card_failure_callback"></a>
+### Card Failure Callback
+
+Notifies the receiver that payment has failed.
+#### Declaration
+
+*Kotlin:*
+```kotlin
+- fun cardTokenizedFailed(goSellError: GoSellError?)
+```
+
+#### Arguments
+
+**goSellError**: goSellError object that has failed.
+
+<a name="backendunknown_failure_callback"></a>
+### Backend Unknown Error Callback
+
+Notifies the receiver that something wrong at Tap.
+#### Declaration
+
+*Kotlin:*
+```kotlin
+- fun backendUnknownError(message: String?)
+```
+
+#### Arguments
+
+**message**: message string that has failed.
+
+<a name="cardform_gettingready_callback"></a>
+### CardForm Getting Ready Callback
+
+Notifies the receiver that card form is initializing.
+#### Declaration
+
+*Kotlin:*
+```kotlin
+- fun cardFormIsGettingReady()
+```
+
+<a name="cardform_isready_callback"></a>
+### CardForm IS Ready Callback
+
+Notifies the receiver that card form is ready to use.
+#### Declaration
+
+*Kotlin:*
+```kotlin
+- fun cardFormIsReady()
+```
+
+<a name="cardform_checkbox_status_callback"></a>
+### SaveCard CheckBoxStatus  Callback
+
+Notifies the receiver if user checked/unchecked to save the card.
+#### Declaration
+
+*Kotlin:*
+```kotlin
+- fun saveCardCheckBoxStatus(saveCardEnabled: Boolean)
+```
+#### Arguments
+
+**saveCardEnabled**: returns boolean of user selection.
+
+<a name="cardform_checkbox_status_callback"></a>
+### SaveCard CheckBoxStatus  Callback
+
+Notifies the receiver if user checked/unchecked to save the card.
+#### Declaration
+
+*Kotlin:*
+```kotlin
+- fun saveCardCheckBoxStatus(saveCardEnabled: Boolean)
+```
+#### Arguments
+
+**saveCardEnabled**: returns boolean of user selection.
+
+**saveCardEnabled**: returns boolean of user selection.
+
+<a name="cardform_card_data_validation_callback"></a>
+### Card Data Validation  Callback
+
+Notifies the receiver if card form is valid and can proceed with further actions.
+#### Declaration
+
+*Kotlin:*
+```kotlin
+- fun cardDataValidation(cardValidation: CardValidation)
+```
+#### Arguments
+
+**cardValidation**: returns cardValidation status .

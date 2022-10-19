@@ -11,7 +11,8 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.*
+import android.widget.RadioGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.button.MaterialButtonToggleGroup
 import company.tap.cardsdk.BottomSheetFragment
@@ -20,18 +21,18 @@ import company.tap.cardsdk.customer.CustomerActivity
 
 class SelectChoiceActivity : AppCompatActivity() {
 
-     private lateinit var radioGroup:RadioGroup
-     private lateinit var radioGroup2:RadioGroup
+    private lateinit var radioGroup: RadioGroup
+    private lateinit var radioGroup2: RadioGroup
 
 
-      private lateinit var selectedUserLanguage :String
-      private lateinit var selectedUserTheme :String
+    private lateinit var selectedUserLanguage: String
+    private lateinit var selectedUserTheme: String
 
-      private  var defaultCardHolderName : String?=null
-    var toggleButtonGroup : MaterialButtonToggleGroup?=null
+    private var defaultCardHolderName: String? = null
+    var toggleButtonGroup: MaterialButtonToggleGroup? = null
 
-    var selectedCurrency : String?=null
-    var selectedCardType : String?=null
+    var selectedCurrency: String? = null
+    var selectedCardType: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +49,7 @@ class SelectChoiceActivity : AppCompatActivity() {
 
 
 
-        selectedCurrency= "KWD"
+        selectedCurrency = "KWD"
         toggleButtonGroup?.addOnButtonCheckedListener { toggleButtonGroup, checkedId, isChecked ->
 
             if (isChecked) {
@@ -83,32 +84,26 @@ class SelectChoiceActivity : AppCompatActivity() {
                 selectedUserLanguage = "ar"
             }
         }
-        if (radioGroup2.checkedRadioButtonId == R.id.theme_dark)
-        {
+        if (radioGroup2.checkedRadioButtonId == R.id.theme_dark) {
             selectedUserTheme = "darktheme"
         }
-        if (radioGroup2.checkedRadioButtonId == R.id.theme_light)
-        {
+        if (radioGroup2.checkedRadioButtonId == R.id.theme_light) {
             selectedUserTheme = "lighttheme"
         }
         radioGroup2.setOnCheckedChangeListener(RadioGroup.OnCheckedChangeListener { group, checkedId ->
 
-            if (radioGroup2.checkedRadioButtonId == R.id.theme_dark)
-            {
+            if (radioGroup2.checkedRadioButtonId == R.id.theme_dark) {
                 selectedUserTheme = "darktheme"
             }
-            if (radioGroup2.checkedRadioButtonId == R.id.theme_light)
-            {
+            if (radioGroup2.checkedRadioButtonId == R.id.theme_light) {
                 selectedUserTheme = "lighttheme"
             }
         })
 
 
-
-
     }
 
-    fun startTokenizationactivity(view: View){
+    fun startTokenizationactivity(view: View) {
 
         val bottomSheetFragment = BottomSheetFragment()
         val bundle = Bundle()
@@ -119,7 +114,7 @@ class SelectChoiceActivity : AppCompatActivity() {
 
 
         bottomSheetFragment.apply {
-           show(supportFragmentManager, BottomSheetFragment.TAG)
+            show(supportFragmentManager, BottomSheetFragment.TAG)
         }
 
     }

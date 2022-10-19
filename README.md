@@ -278,3 +278,12 @@ Notifies the receiver if card form is valid and can proceed with further actions
 #### Arguments
 
 **cardValidation**: returns cardValidation status .
+
+### [](https://github.com/Tap-Payments/card-mawarid-Android#tokenization)Tokenization
+
+**Tokenization** Tokenize straightaway as below, once the cardForm data is valid
+
+*Kotlin*
+```kotlin
+ dataConfiguration.startTokenize(cardInputForm, context)
+```

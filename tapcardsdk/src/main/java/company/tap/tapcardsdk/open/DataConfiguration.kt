@@ -164,23 +164,23 @@ object DataConfiguration  {
     fun initCardForm(
         context: Context,
         dataConfig: TapCardDataConfiguration,
-        tapCardInputView: CardInputForm
+        cardInputForm: CardInputForm
     ) {
 
-        initializeCardForm(context,dataConfig,tapCardInputView)
+        initializeCardForm(context,dataConfig,cardInputForm)
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
     private fun initializeCardForm(
         context: Context,
         dataConfig: TapCardDataConfiguration,
-        tapCardInputView: CardInputForm
+        cardInputForm: CardInputForm
     ) {
         PaymentDataSource.setSelectedCurrency(dataConfig.selectedCurrency)
       //  PaymentDataSource.setCardType(dataConfig.selectedCardType)
 
 
-        tapCardInputView.visibility = View.GONE
+        cardInputForm.visibility = View.GONE
         NetworkApp.initNetwork(
             context,
             dataConfig.authToken,
@@ -199,7 +199,7 @@ object DataConfiguration  {
 
         CardViewModel().processEvent(
             CardViewEvent.ConfigEvent,null
-            , context,tapCardInputView ,requestModel,null, null
+            , context,cardInputForm ,requestModel,null, null
         )
         _context = context
     }

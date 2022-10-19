@@ -338,7 +338,7 @@ class CardInputForm @JvmOverloads constructor(
     var checkedSaveCardEnabled: Boolean by Delegates.observable(
         BaseCardInput.DEFAULT_SWITCH
     ) { _, _, isEnabled ->
-
+       DataConfiguration.getListener()?.saveCardCheckBoxStatus(isEnabled)
     }
 
 

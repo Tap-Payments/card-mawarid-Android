@@ -27,6 +27,7 @@
         <item name="android:windowSoftInputMode">adjustResize</item>
         <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay</item>
         <item name="backgroundTint">@android:color/transparent</item>
-        <item name="android:colorBackground">@android:color/transparent</item>
+        <item name="android:background">@drawable/rounded_dialog</item>
+        <item name="cornerRadius">@dimen/margin_basic_15dp</item>
     </style>
 </resources>

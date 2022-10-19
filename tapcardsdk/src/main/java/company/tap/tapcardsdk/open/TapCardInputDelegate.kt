@@ -34,9 +34,9 @@ interface TapCardInputDelegate {
      **/
     fun cardFormIsReady()
     /**
-     * CallBack of saveCardSelected by user returns @param saveCardEnabled.
+     * CallBack of saveCardCheckBoxStatus by user returns @param saveCardEnabled.
      **/
-    fun saveCardSelected(saveCardEnabled: Boolean)
+    fun saveCardCheckBoxStatus(saveCardEnabled: Boolean)
 
     /**
      * CallBack of  cardDataValidation returns @param chargeError.

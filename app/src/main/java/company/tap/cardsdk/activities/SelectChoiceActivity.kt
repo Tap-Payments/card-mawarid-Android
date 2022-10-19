@@ -14,6 +14,7 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.button.MaterialButtonToggleGroup
+import company.tap.cardsdk.BottomSheetFragment
 import company.tap.cardsdk.R
 import company.tap.cardsdk.customer.CustomerActivity
 
@@ -108,20 +109,19 @@ class SelectChoiceActivity : AppCompatActivity() {
     }
 
     fun startTokenizationactivity(view: View){
-        if(::selectedUserLanguage.isInitialized && ::selectedUserTheme.isInitialized) {
-            println("defaultCardHolderName is"+defaultCardHolderName)
-            val intent = Intent(this, MainActivity::class.java)
-            intent.putExtra("languageSelected", selectedUserLanguage)
-            intent.putExtra("themeSelected", selectedUserTheme)
-            intent.putExtra("selectedCurrency", selectedCurrency)
+
+        val bottomSheetFragment = BottomSheetFragment()
+        val bundle = Bundle()
+        bundle.putString("languageSelected", selectedUserLanguage)
+        bundle.putString("themeSelected", selectedUserTheme)
+        bundle.putString("selectedCurrency", selectedCurrency)
+        bottomSheetFragment.arguments = bundle
 
 
-
-            startActivity(intent)
-
-        } else{
-            Toast.makeText(this, "Please make your selection", Toast.LENGTH_SHORT).show()
+        bottomSheetFragment.apply {
+           show(supportFragmentManager, BottomSheetFragment.TAG)
         }
+
     }
 
     private fun showToast(str: String) {

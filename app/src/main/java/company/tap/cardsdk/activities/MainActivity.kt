@@ -52,16 +52,8 @@ class MainActivity : AppCompatActivity() , TapCardInputDelegate {
 
     }
 
-    @RequiresApi(Build.VERSION_CODES.N)
-    fun tokenizeCard(view: View) {
-        dataConfiguration.startTokenize(cardInputForm,this)
-    }
 
-    @RequiresApi(Build.VERSION_CODES.N)
-    fun saveCard(view: View) {
-      //  multiPopup()
 
-    }
     private fun logicToHandleThemeLanguageChange(
         selectedLanguage: String,
         selectedTheme: String
@@ -113,8 +105,8 @@ class MainActivity : AppCompatActivity() , TapCardInputDelegate {
 
     }
 
-    override fun saveCardSelected(saveCardEnabled: Boolean) {
-        println(" user has selected to saveCardSelected$saveCardEnabled")
+    override fun saveCardCheckBoxStatus(saveCardEnabled: Boolean) {
+        println(" user has selected to saveCardCheckBoxStatus$saveCardEnabled")
     }
 
     override fun cardDataValidation(cardValidation: CardValidation) {

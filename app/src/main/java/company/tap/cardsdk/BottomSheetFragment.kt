@@ -40,8 +40,8 @@ class BottomSheetFragment : BottomSheetDialogFragment() , TapCardInputDelegate {
     var dataConfiguration: DataConfiguration = DataConfiguration
     lateinit var bottomSheetDialog: BottomSheetDialog
 
-    private var topLeftCorner = 16f
-    private var topRightCorner = 16f
+    private var topLeftCorner = 18f
+    private var topRightCorner = 18f
     private var bottomRightCorner = 0f
     private var bottomLeftCorner = 0f
     var backgroundColor = Color.WHITE
@@ -209,7 +209,7 @@ class BottomSheetFragment : BottomSheetDialogFragment() , TapCardInputDelegate {
             bottomSheetLayout?.background = getBackgroundDrawable()
 
         }
-
+       bottomSheetDialog.behavior.isDraggable = true
         return bottomSheetDialog
     }
 

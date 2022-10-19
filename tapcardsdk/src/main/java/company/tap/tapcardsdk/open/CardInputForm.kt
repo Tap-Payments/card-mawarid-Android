@@ -763,7 +763,7 @@ class CardInputForm @JvmOverloads constructor(
                }else monthVal = month.toString()
 
                if(::monthVal.isInitialized)
-               expiryDateEditText.setText ("$monthVal/$year")
+               expiryDateEditText.setText ("$monthVal/$yearVal")
 
            }, year!!, month!!, day_of_month!!
        )

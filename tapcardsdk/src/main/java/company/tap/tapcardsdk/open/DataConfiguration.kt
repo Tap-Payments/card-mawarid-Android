@@ -179,14 +179,14 @@ object DataConfiguration  {
         PaymentDataSource.setSelectedCurrency(dataConfig.selectedCurrency)
       //  PaymentDataSource.setCardType(dataConfig.selectedCardType)
 
-//enable/ disable debug this true-false for network call
+//TODO NOTE enable/ disable debug this true-false for network call
         cardInputForm.visibility = View.GONE
         NetworkApp.initNetwork(
             context,
             dataConfig.authToken,
             dataConfig.packageId,
             ApiService.BASE_URL,
-            "NATIVE",true)
+            "NATIVE",false)
         val requestModel =
             TapConfigRequestModel(dataConfig.authToken?.let {
                 Gateway(

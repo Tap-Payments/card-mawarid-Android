@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_gravity="bottom"
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_marginTop="@dimen/margin_basic_15dp">
 
 
@@ -55,6 +55,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/saveCardButton"
             android:text="Save Card"
+            android:visibility="gone"
             android:layout_alignParentEnd="true"
             />
     </RelativeLayout>

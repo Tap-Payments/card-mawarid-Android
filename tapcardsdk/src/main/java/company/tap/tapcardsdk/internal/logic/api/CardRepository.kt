@@ -98,7 +98,7 @@ class CardRepository : APIRequestCallback , WebViewContract {
         if (tapCardInputView != null) {
             this._tapCardInputView =tapCardInputView
         }
-        DataConfiguration.tapCardInputDelegate?.cardFormIsGettingReady()
+      //  DataConfiguration.tapCardInputDelegate?.cardFormIsGettingReady()
         jsonString = Gson().toJson(tapConfigRequestModel)
         NetworkController.getInstance().processRequest(
             TapMethodType.POST,

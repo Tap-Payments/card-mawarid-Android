@@ -213,16 +213,6 @@ Notifies the receiver that something wrong at Tap.
 
 **message**: message string that has failed.
 
-<a name="cardform_gettingready_callback"></a>
-### CardForm Getting Ready Callback
-
-Notifies the receiver that card form is initializing.
-#### Declaration
-
-*Kotlin:*
-```kotlin
-- fun cardFormIsGettingReady()
-```
 
 <a name="cardform_isready_callback"></a>
 ### CardForm IS Ready Callback

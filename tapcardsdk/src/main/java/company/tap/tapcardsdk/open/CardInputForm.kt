@@ -704,6 +704,9 @@ class CardInputForm @JvmOverloads constructor(
     }
 
     private fun initTheme() {
+        if(ThemeManager.currentTheme.isNullOrEmpty()){
+            ThemeManager.loadTapTheme(context.resources,R.raw.defaultlighttheme,"lighttheme")
+        }
         containerLayout.setBackgroundColor(Color.parseColor(ThemeManager.getValue("cardView.containter.backgroundColor")))
         cardNumberEditText.setHintTextColor(Color.parseColor(ThemeManager.getValue("cardView.textFields.placeholderColor")))
         cardNumberEditText.setTextColor(Color.parseColor(ThemeManager.getValue("cardView.textFields.textColor")))
@@ -783,6 +786,10 @@ class CardInputForm @JvmOverloads constructor(
 
 
     private fun initLocals() {
+        /*if(LocalizationManager.currentLocalized.isNullOrEmpty()){
+            LocalizationManager.loadTapLocale(context.resources,
+                R.raw.cardlocalisation)
+        }*/
         val holderNameHint :String = LocalizationManager.getValue("cardNamePlaceholder","cardForm")
         val cardNumberHint :String = LocalizationManager.getValue("cardNumberPlaceholder","cardForm")
         val expiryHint :String = LocalizationManager.getValue("cardExpiryPlaceholder","cardForm")

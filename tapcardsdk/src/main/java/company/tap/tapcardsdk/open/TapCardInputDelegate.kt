@@ -25,10 +25,7 @@ interface TapCardInputDelegate {
      **/
     fun backendUnknownError(message: String?)
 
-    /**
-     * CallBack of  cardFormIsGettingReady.
-     **/
-    fun cardFormIsGettingReady()
+
     /**
      * CallBack of  cardFormIsReady.
      **/

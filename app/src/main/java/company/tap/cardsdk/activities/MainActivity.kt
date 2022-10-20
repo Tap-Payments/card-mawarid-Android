@@ -105,9 +105,7 @@ class MainActivity : AppCompatActivity(), TapCardInputDelegate {
     }
 
 
-    override fun cardFormIsGettingReady() {
-        println("<<<<<<<<<<cardFormIsGettingReady>>>>>>>>>")
-    }
+
 
     override fun cardFormIsReady() {
         println("<<<<<<<<<<cardFormIsReady>>>>>>>>>")

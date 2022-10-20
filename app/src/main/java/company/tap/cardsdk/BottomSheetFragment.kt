@@ -165,10 +165,7 @@ class BottomSheetFragment : BottomSheetDialogFragment(), TapCardInputDelegate {
         showDialogAlert("backendUnknownError", "backendUnknownError" + message)
     }
 
-    override fun cardFormIsGettingReady() {
-        println("<<<<<<<<<<cardFormIsGettingReady>>>>>>>>>")
 
-    }
 
     override fun cardFormIsReady() {
         println("<<<<<<<<<<cardFormIsReady>>>>>>>>>")

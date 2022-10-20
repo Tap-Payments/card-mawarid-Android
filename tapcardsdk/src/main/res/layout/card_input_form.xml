@@ -68,7 +68,7 @@
                     android:textDirection="firstStrongLtr"
                     android:textAlignment="viewStart"
                     android:gravity="start|end"
-                    android:layout_marginLeft="2dp"
+
                     android:layout_marginTop="5dp"
                     android:padding="5dp"
                     android:background="@drawable/edittext_background"

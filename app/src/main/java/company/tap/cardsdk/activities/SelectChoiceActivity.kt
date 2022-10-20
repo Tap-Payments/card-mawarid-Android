@@ -38,6 +38,7 @@ class SelectChoiceActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_select_choice)
         initializeViews()
+
         saveTheSelectedValue()
     }
 
@@ -99,6 +100,17 @@ class SelectChoiceActivity : AppCompatActivity() {
                 selectedUserTheme = "lighttheme"
             }
         })
+        val bottomSheetFragment = BottomSheetFragment()
+        val bundle = Bundle()
+        bundle.putString("languageSelected", selectedUserLanguage)
+        bundle.putString("themeSelected", selectedUserTheme)
+        bundle.putString("selectedCurrency", selectedCurrency)
+        bottomSheetFragment.arguments = bundle
+
+
+        bottomSheetFragment.apply {
+            show(supportFragmentManager, BottomSheetFragment.TAG)
+        }
 
 
     }

@@ -12,6 +12,7 @@
         android:orientation="vertical"
         app:chainUseRtl="true"
         android:layoutDirection="locale"
+        android:visibility="gone"
         tools:context=".activities.SelectChoiceActivity">
 
 <androidx.appcompat.widget.AppCompatTextView

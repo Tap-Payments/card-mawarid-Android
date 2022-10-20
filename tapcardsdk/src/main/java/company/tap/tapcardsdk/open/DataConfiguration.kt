@@ -179,7 +179,7 @@ object DataConfiguration  {
         PaymentDataSource.setSelectedCurrency(dataConfig.selectedCurrency)
       //  PaymentDataSource.setCardType(dataConfig.selectedCardType)
 
-
+//enable/ disable debug this true-false for network call
         cardInputForm.visibility = View.GONE
         NetworkApp.initNetwork(
             context,

@@ -6,6 +6,7 @@ import android.content.res.ColorStateList
 import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.Typeface
+import android.os.Build
 import android.os.Bundle
 import android.os.Parcelable
 import android.text.*
@@ -16,15 +17,15 @@ import android.view.animation.Animation
 import android.view.animation.Transformation
 import android.view.inputmethod.EditorInfo
 import android.widget.*
-import androidx.annotation.ColorInt
-import androidx.annotation.IdRes
+import androidx.annotation.*
 import androidx.annotation.IntRange
-import androidx.annotation.VisibleForTesting
 import androidx.core.view.AccessibilityDelegateCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.accessibility.AccessibilityNodeInfoCompat
 import company.tap.tapcardsdk.R
 import company.tap.tapcardsdk.databinding.CardInputFormBinding
+import company.tap.tapcardsdk.internal.logic.api.CardViewEvent
+import company.tap.tapcardsdk.internal.logic.api.CardViewModel
 import company.tap.tapcardsdk.internal.logic.api.models.CreateTokenCard
 import company.tap.tapcardsdk.internal.ui.`interface`.BaseCardInput
 import company.tap.tapcardsdk.internal.ui.`interface`.CardInputListener
@@ -96,7 +97,7 @@ class CardInputForm @JvmOverloads constructor(
     private var year: Int? = null
     private var month: Int? = null
     lateinit var monthVal:String
-
+    private val BIN_NUMBER_LENGTH = 6
     private val frameStart: Int
         get() {
             val isLtr = context.resources.configuration.layoutDirection == View.LAYOUT_DIRECTION_LTR
@@ -347,6 +348,7 @@ class CardInputForm @JvmOverloads constructor(
      *
      * @param cardNumber card number to be set
      */
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun setCardNumber(cardNumber: String?) {
         println("setCardNumber value>>>"+cardNumber)
         cardNumberEditText.setText(cardNumber)
@@ -629,6 +631,17 @@ class CardInputForm @JvmOverloads constructor(
                     }
                 }
         )
+        cardNumberEditText.setAfterTextChangedListener(
+                object : TapTextInput.AfterTextChangedListener {
+                    @RequiresApi(Build.VERSION_CODES.N)
+                    override fun onTextChanged(text: String) {
+                        if(text.length >=6){
+                            callCardBinNumberApi(text)
+                        }
+
+                    }
+                }
+        )
 
      /*   cardBrandView.onScanClicked = {
             Toast.makeText(context, "Clicked", Toast.LENGTH_SHORT).show()
@@ -639,6 +652,7 @@ class CardInputForm @JvmOverloads constructor(
         }
 
         cardNumberEditText.completionCallback = {
+
             expiryDateEditText.visibility = View.VISIBLE
             cvcNumberEditText.visibility = View.VISIBLE
            // println("cardNumberEditText is????"+cardNumberEditText.cardNumber)
@@ -688,7 +702,7 @@ class CardInputForm @JvmOverloads constructor(
             override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
                     // do your stuff here
-                    println("expiryDateEditText>>>>>>>>"+expiryDateEditText)
+
                     expiryDateEditText.requestFocus()
                 }
                 return false
@@ -786,6 +800,7 @@ class CardInputForm @JvmOverloads constructor(
 
 
     private fun initLocals() {
+        //todo:once jitpack is fine
         /*if(LocalizationManager.currentLocalized.isNullOrEmpty()){
             LocalizationManager.loadTapLocale(context.resources,
                 R.raw.cardlocalisation)
@@ -1367,6 +1382,20 @@ class CardInputForm @JvmOverloads constructor(
 
     }
 
+    /*
+      This function for calling api to validate card number after 6 digit
+       */
+    @RequiresApi(Build.VERSION_CODES.N)
+    private fun callCardBinNumberApi(s: CharSequence) {
+
+        if (s.trim().toString().replace(" ", "").length == BIN_NUMBER_LENGTH) {
+            CardViewModel().processEvent(
+                CardViewEvent.RetreiveBinLookupEvent,
+                null, context, this ,null,s.trim().toString().replace(" ", ""), null, null
+            )
+
+        }
+    }
 
 
 

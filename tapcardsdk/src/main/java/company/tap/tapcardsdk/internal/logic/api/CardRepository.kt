@@ -157,21 +157,7 @@ class CardRepository : APIRequestCallback , WebViewContract {
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onSuccess(responseCode: Int, requestCode: Int, response: Response<JsonElement>?) {
-        if (requestCode == CONFIG_CODE) {
-            response?.body().let {
-                configResponse = Gson().fromJson(it, TapConfigResponseModel::class.java)
-
-                println("configResponse>>"+configResponse?.token)
-                PaymentDataSource.setTokenConfig(configResponse?.token)
-                NetworkApp.initNetworkToken(configResponse?.token, _context, ApiService.BASE_URL,true)
-                val reqBody = EmptyBody()
-                jsonString =Gson().toJson(reqBody)
-                NetworkController.getInstance().processRequest(
-                    TapMethodType.POST, ApiService.INIT,  jsonString,
-                    this, INIT_CODE
-                )
-            }
-        }else if (requestCode == INIT_CODE) {
+     if (requestCode == INIT_CODE) {
             response?.body().let {
                 initResponse = Gson().fromJson(it, SDKSettings::class.java)
                 PaymentDataSource.setSDKSettings(initResponse)

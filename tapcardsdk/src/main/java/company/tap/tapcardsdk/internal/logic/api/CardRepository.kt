@@ -10,15 +10,12 @@ import androidx.annotation.RestrictTo
 import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.Gson
 import com.google.gson.JsonElement
+import company.tap.tapcardsdk.internal.logic.api.requests.PaymentOptionsRequest
 
 import company.tap.tapcardsdk.internal.logic.api.requests.BinLookUpRequestModel
 import company.tap.tapcardsdk.internal.logic.api.requests.CreateSaveCardRequest
 import company.tap.tapcardsdk.internal.logic.api.requests.CreateTokenWithCardDataRequest
 import company.tap.tapcardsdk.internal.logic.api.requests.EmptyBody
-import company.tap.tapcardsdk.internal.logic.api.responses.InitResponseModel
-import company.tap.tapcardsdk.internal.logic.api.responses.PaymentOptionsInit
-import company.tap.tapcardsdk.internal.logic.api.responses.SDKSettings
-import company.tap.tapcardsdk.internal.logic.api.responses.TapConfigResponseModel
 import company.tap.tapcardsdk.internal.logic.datamanagers.PaymentDataProvider
 import company.tap.tapcardsdk.internal.logic.datamanagers.PaymentDataSource
 import company.tap.tapcardsdk.internal.logic.interfaces.CurrenciesSupport
@@ -33,14 +30,17 @@ import company.tap.tapcardsdk.internal.logic.api.models.Reference
 import company.tap.tapcardsdk.open.CardInputForm
 import company.tap.tapcardsdk.open.DataConfiguration
 import company.tap.tapcardsdk.internal.logic.api.models.TapCustomer
+import company.tap.tapcardsdk.internal.logic.api.responses.*
 import company.tap.tapnetworkkit.connection.NetworkApp
 import company.tap.tapnetworkkit.controller.NetworkController
 import company.tap.tapnetworkkit.enums.TapMethodType
 import company.tap.tapnetworkkit.exception.GoSellError
 import company.tap.tapnetworkkit.interfaces.APIRequestCallback
+import company.tap.tapuilibrary.uikit.enums.ActionButtonState
 import io.reactivex.plugins.RxJavaPlugins
 import io.reactivex.subjects.BehaviorSubject
 import retrofit2.Response
+import java.math.BigDecimal
 
 
 /**
@@ -67,10 +67,10 @@ class CardRepository : APIRequestCallback , WebViewContract {
     private var configResponse: TapConfigResponseModel?=null
     @JvmField
     var initResponseModel : InitResponseModel?= null
-     var paymentOptionsResponse: PaymentOptionsInit? =null
+     var paymentOptionsResponse: PaymentOptionsResponse? =null
     lateinit var paymentOptionsWorker: java.util.ArrayList<PaymentOption>
     @RequiresApi(Build.VERSION_CODES.N)
-    fun getInitData(_context: Context, cardViewModel: CardViewModel?) {
+    fun getInitData(_context: Context, cardViewModel: CardViewModel?,tapCardInputView: CardInputForm?) {
         if (cardViewModel != null) {
             this.cardViewModel = cardViewModel
         }
@@ -82,6 +82,9 @@ class CardRepository : APIRequestCallback , WebViewContract {
             INIT_CODE
         )
         this.cardRepositoryContext = _context
+        if (tapCardInputView != null) {
+            this._tapCardInputView = tapCardInputView
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
@@ -111,17 +114,15 @@ class CardRepository : APIRequestCallback , WebViewContract {
         this._context =_context
     }
 
+
     @RequiresApi(Build.VERSION_CODES.N)
     fun retrieveBinLookup(cardViewModel: CardViewModel, binValue: String?) {
         this.cardViewModel = cardViewModel
-        val reqBody = BinLookUpRequestModel(binValue)
-        jsonString =Gson().toJson(reqBody)
         NetworkController.getInstance().processRequest(
-            TapMethodType.POST, ApiService.BIN, jsonString,
+            TapMethodType.GET, ApiService.BIN + binValue, null,
             this, BIN_RETRIEVE_CODE
         )
     }
-
     @RequiresApi(Build.VERSION_CODES.N)
     fun retrieveSaveCard(cardViewModel: CardViewModel, savedResponseId:String?, context: Context?) {
         this.cardViewModel = cardViewModel
@@ -170,27 +171,30 @@ class CardRepository : APIRequestCallback , WebViewContract {
                     this, INIT_CODE
                 )
             }
-        }
-       else if (requestCode == INIT_CODE) {
+        }else if (requestCode == INIT_CODE) {
             response?.body().let {
                 initResponse = Gson().fromJson(it, SDKSettings::class.java)
-              //  PaymentDataSource.setSDKSettings(initResponse)
+                PaymentDataSource.setSDKSettings(initResponse)
 
-                if (response?.body() != null) {
-                    response.body().let {
-                        //println("INIT REsponse>>>>"+response.body())
-                        initResponseModel = Gson().fromJson(it, InitResponseModel::class.java)
-                        PaymentDataSource.setInitResponse(initResponseModel)
-                        paymentOptionsResponse = initResponseModel?.paymentOptionsInit
-                        filterViewModels(PaymentDataSource.getSelectedCurrency().toString())
-                       PaymentDataSource.setMerchantData(initResponseModel?.merchant)
-                        _tapCardInputView.visibility = View.VISIBLE
 
             }
-                    DataConfiguration.tapCardInputDelegate?.cardFormIsReady()
         }
+        else if (requestCode == PAYMENT_OPTIONS_CODE) {
+            if (response?.body() != null) {
+                response.body().let {
+                    paymentOptionsResponse = Gson().fromJson(it, PaymentOptionsResponse::class.java)
+                    PaymentDataSource.setPaymentOptionsResponse(paymentOptionsResponse)
+                    filterViewModels(PaymentDataSource.getSelectedCurrency().toString())
+                    PaymentDataSource.setMerchantData(initResponseModel?.merchant)
+                    _tapCardInputView.visibility = View.VISIBLE
+                }
+                DataConfiguration.tapCardInputDelegate?.cardFormIsReady()
+
+            }else {
+               DataConfiguration.getListener()?.backendUnknownError("Session Failed to start")
             }
-       } else if(requestCode == BIN_RETRIEVE_CODE){
+
+        }else if(requestCode == BIN_RETRIEVE_CODE){
             response?.body().let {
                 binLookupResponse = Gson().fromJson(it, BINLookupResponse::class.java)
                 if(binLookupResponse!=null)
@@ -274,14 +278,14 @@ class CardRepository : APIRequestCallback , WebViewContract {
 
     @RequiresApi(Build.VERSION_CODES.N)
     fun filterViewModels(currency: String) {
+        println("paymentOptionsResponse?.paymentOptions"+paymentOptionsResponse?.paymentOptions)
         if (paymentOptionsResponse?.paymentOptions != null)
             paymentOptionsWorker = paymentOptionsResponse?.paymentOptions?.let {
                 java.util.ArrayList<PaymentOption>(
                     it
                 )
             }!!
-        paymentOptionsWorker.sortBy { paymentOption: PaymentOption ->paymentOption.orderBy  }
-       // paymentOptionsWorker = java.util.ArrayList<PaymentOption>( paymentOptionsWorker.sortBy { paymentOption: PaymentOption ->paymentOption.orderBy  })!!
+      //  paymentOptionsWorker.sortBy { paymentOption: PaymentOption ->paymentOption.orderBy  }
 
 
         val cardPaymentOptions: java.util.ArrayList<PaymentOption> =
@@ -512,10 +516,40 @@ class CardRepository : APIRequestCallback , WebViewContract {
             private const val BIN_RETRIEVE_CODE = 4
             private const val CREATE_SAVE_CARD = 5
             private const val RETRIEVE_SAVE_CARD_CODE = 6
+            private const val PAYMENT_OPTIONS_CODE = 7
         }
 
         override fun redirectLoadingFinished(done: Boolean, charge: Charge?, contextSDK: Context?) {
 
         }
+
+    @RequiresApi(Build.VERSION_CODES.N)
+    fun getPaymentOptions(
+        _context: Context,
+        cardViewModel: CardViewModel
+    ) {
+        this.cardViewModel = cardViewModel
+
+        val requestBody = PaymentOptionsRequest(
+            PaymentDataSource.getTransactionMode(),
+            BigDecimal.ONE,
+            null,
+            null,
+            null,
+            PaymentDataSource.getSelectedCurrency(),
+            null,
+            TapCardDataConfiguration().merchantId,
+           null,
+            null
+        )
+        println("getTransactionMode"+PaymentDataSource.getTransactionMode())
+
+        val jsonString = Gson().toJson(requestBody)
+        NetworkController.getInstance().processRequest(
+            TapMethodType.POST, ApiService.PAYMENT_TYPES, jsonString, this, PAYMENT_OPTIONS_CODE
+        )
+
+         this.cardRepositoryContext = _context
+    }
 
     }

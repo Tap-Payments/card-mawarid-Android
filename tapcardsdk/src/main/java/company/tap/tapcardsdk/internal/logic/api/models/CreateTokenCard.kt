@@ -46,7 +46,7 @@ class CreateTokenCard constructor(cardNumber: String,
         val _sensitiveCardData =
             SensitiveCardData(cardNumber, expirationYear, expirationMonth, cvc, cardholderName)
         val cryptedDataJson = Gson().toJson(_sensitiveCardData)
-        this.sensitiveCardData = PaymentDataSource.getMerchantData()?.encryptionKey?.let {
+        this.sensitiveCardData = PaymentDataSource.getSDKSettings()?.data?.encryptionKey?.let {
             CryptoUtil.encryptJsonString(
                 cryptedDataJson,
                 it

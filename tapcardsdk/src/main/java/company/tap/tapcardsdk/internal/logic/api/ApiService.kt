@@ -10,19 +10,22 @@ All rights reserved.
  **/
 @RestrictTo(RestrictTo.Scope.LIBRARY)
 object ApiService {
-  //  const val BASE_URL = "https://api.tap.company/v2/"
-    const val BASE_URL = "https://checkout-mw-java.dev.tap.company/api/"
-  //  const val INIT = "init"
-    const val INIT = "checkout/init"
+   const val BASE_URL = "https://api.tap.company/v2/"
+   // const val BASE_URL = "https://checkout-mw-java.dev.tap.company/api/"
+    const val INIT = "init"
+  //  const val INIT = "checkout/init"
     /**
      * The Token.
      */
-    const val TOKEN = "token"
+    const val TOKEN = "tokens"
     const val PAYMENT_TYPES = "payment/types"
     const val RETURN_URL ="gosellsdk://return_url"
     //const val BIN ="bin/"
     const val CONFIG ="checkout/config"
-    const val BIN ="card/bin"
+
+
+
+  const val BIN ="bin/"
 
   /**
    * The Save card.

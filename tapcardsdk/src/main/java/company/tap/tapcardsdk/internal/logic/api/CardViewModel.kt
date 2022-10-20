@@ -14,6 +14,11 @@ import company.tap.tapcardsdk.open.CardInputForm
 
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlin.random.Random
 
 /**
  * Created by AhlaamK on 3/23/22.
@@ -44,19 +49,33 @@ class CardViewModel : ViewModel() {
 
     }
 
+
     @RequiresApi(Build.VERSION_CODES.N)
     private fun getInitData(
+
         cardViewModel: CardViewModel?,
-        _context: Context?
+
+        _context: Context?,
+        tapCardInputView: CardInputForm?
     ) {
         if (_context != null) {
-            this.context = _context
-            repository.getInitData(_context, cardViewModel)
+            this.context =_context
+            repository.getInitData(_context,cardViewModel , tapCardInputView)
         }
 
 
-    }
+        GlobalScope.launch(Dispatchers.Main) { // launch coroutine in the main thread
+            val apiResponseTime = Random.nextInt(1000, 8000)
+            delay(apiResponseTime.toLong())
+            if (_context != null) {
 
+                if (cardViewModel != null) {
+                    repository.getPaymentOptions(_context,cardViewModel)
+                }
+
+            }
+        }
+    }
 
     @RequiresApi(Build.VERSION_CODES.N)
     private fun getConfigData(
@@ -83,8 +102,8 @@ class CardViewModel : ViewModel() {
         configRequestModel: TapConfigRequestModel?, binValue: String? = null, activity: AppCompatActivity?, savedResponseId:String?=null
     ) {
         when (event) {
-            CardViewEvent.ConfigEvent -> getConfigData( this ,context,configRequestModel,tapCardInputView)
-            CardViewEvent.InitEvent -> getInitData( this ,context)
+           // CardViewEvent.ConfigEvent -> getConfigData( this ,context,configRequestModel,tapCardInputView)
+            CardViewEvent.InitEvent -> getInitData( this ,context,tapCardInputView)
             CardViewEvent.CreateTokenEvent -> createTokenWithEncryptedCard(cardDataRequest,
                     tapCardInputView,activity )
             CardViewEvent.RetreiveBinLookupEvent -> retrieveBinlookup(this,binValue)
@@ -99,7 +118,7 @@ class CardViewModel : ViewModel() {
 
         @RequiresApi(Build.VERSION_CODES.N)
         private fun createTokenWithEncryptedCard(createTokenWithEncryptedDataRequest: CreateTokenCard?, cardInputForm:CardInputForm?, activity: AppCompatActivity?) {
-            //  println("createTokenWithEncryptedDataRequest>>."+createTokenWithEncryptedDataRequest)
+              println("createTokenWithEncryptedDataRequest>>."+createTokenWithEncryptedDataRequest)
           //  if (createTokenWithEncryptedDataRequest != null) {
                 repository.createTokenWithEncryptedCard(createTokenWithEncryptedDataRequest, cardInputForm,activity)
          //   }

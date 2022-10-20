@@ -10,6 +10,8 @@ import company.tap.tapcardsdk.internal.logic.api.models.Receipt
 import company.tap.tapcardsdk.internal.logic.api.models.Reference
 import company.tap.tapcardsdk.internal.logic.api.enums.TransactionMode
 import company.tap.tapcardsdk.internal.logic.api.models.TapCustomer
+import company.tap.tapcardsdk.internal.logic.api.responses.PaymentOptionsResponse
+import company.tap.tapcardsdk.internal.logic.api.responses.SDKSettings
 
 /**
  * Created by AhlaamK on 3/23/22.
@@ -39,7 +41,8 @@ object PaymentDataSource : company.tap.tapcardsdk.internal.logic.interfaces.Paym
     private var paymentDescription: String? = null
     private lateinit var tapCustomer: TapCustomer
     private val cardIssuer: CardIssuer? = null
-
+    private var paymentOptionsResponse: PaymentOptionsResponse? = null
+    private var sdkSettings: SDKSettings? = null
     /**
      * Set sdkSettings.
      *
@@ -93,6 +96,23 @@ object PaymentDataSource : company.tap.tapcardsdk.internal.logic.interfaces.Paym
      */
     fun setPaymentDescription(paymentDescription: String?) {
         PaymentDataSource.paymentDescription = paymentDescription
+    }
+    /**
+     * Set sdkSettings.
+     *
+     * @param sdkSettings the sdkSettings
+     */
+    fun setSDKSettings(sdkSettings: SDKSettings?) {
+        this.sdkSettings = sdkSettings
+    }
+
+    /**
+     * Set sdkSettings.
+     *
+     * @param sdkSettings the sdkSettings
+     */
+    fun setPaymentOptionsResponse(paymentOptionsResponse: PaymentOptionsResponse?) {
+        this.paymentOptionsResponse = paymentOptionsResponse
     }
 
     /**
@@ -246,5 +266,9 @@ object PaymentDataSource : company.tap.tapcardsdk.internal.logic.interfaces.Paym
 
     override fun getPaymentReference(): Reference? {
         return paymentReference
+    }
+
+    override fun getSDKSettings(): SDKSettings? {
+        return sdkSettings
     }
 }

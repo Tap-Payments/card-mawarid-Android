@@ -1259,8 +1259,9 @@ class CardInputForm @JvmOverloads constructor(
 
 
 
-        //  println("expiryDate in getcard" + expiryDate)
-        //  println("cardHolderName >> "+ cardHolderName)
+          println("expiryDate in getcard" + expiryDate)
+          println("cardHolderName >> "+ cardHolderName)
+          println("cvc >> "+ cvc)
 
         return if (number == null || expiryDate == null || cvc == null) {
             null

@@ -198,7 +198,7 @@ object DataConfiguration  {
 
 
         CardViewModel().processEvent(
-            CardViewEvent.ConfigEvent,null
+            CardViewEvent.InitEvent,null
             , context,cardInputForm ,requestModel,null, null
         )
         _context = context

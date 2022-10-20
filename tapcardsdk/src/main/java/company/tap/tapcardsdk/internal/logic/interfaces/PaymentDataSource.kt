@@ -9,6 +9,7 @@ import company.tap.tapcardsdk.internal.logic.api.enums.TransactionMode
 import company.tap.tapcardsdk.internal.logic.api.models.BINLookupResponse
 import company.tap.tapcardsdk.internal.logic.api.models.CardIssuer
 import company.tap.tapcardsdk.internal.logic.api.models.TapCustomer
+import company.tap.tapcardsdk.internal.logic.api.responses.SDKSettings
 
 /**
  * Created by AhlaamK on 3/23/22.
@@ -83,4 +84,6 @@ interface PaymentDataSource {
      * Payment reference. Implement this property to keep a reference to the transaction on your backend. @return the payment reference
      */
     fun getPaymentReference(): Reference?
+
+    fun getSDKSettings(): SDKSettings?
 }

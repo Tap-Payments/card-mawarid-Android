@@ -226,6 +226,7 @@ class BottomSheetFragment : BottomSheetDialogFragment(), TapCardInputDelegate {
     private fun getBackgroundDrawable(): Drawable {
         val shape = ShapeDrawable(
             RoundRectShape(
+
                 floatArrayOf(
                     topLeftCorner, topLeftCorner,
                     topRightCorner, topRightCorner,

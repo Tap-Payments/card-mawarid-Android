@@ -58,16 +58,23 @@ To integrate goSellSDK into your project add it in your **root** `build.gradle` 
 		repositories {
 			...
 			maven { url 'https://jitpack.io' }
+                        jcenter()
+
 		}
 	}
 ```
 Step 2. Add the dependency
 ```kotlin
 	dependencies {
-	        implementation 'com.github.Tap-Payments:card-mawarid-Android:Tag'
+	        implementation 'com.github.Tap-Payments:card-mawarid-Android:1.0.1'
 	}
 ```
 
+Step 3. Add in gradle.properties
+```
+android.useAndroidX=true
+android.enableJetifier=true
+```
 ### [](https://github.com/Tap-Payments/card-mawarid-Android#DataConfig)Data Configuration
 
 You will need to configure the Tap Card KIT before using it, by providing your data. This will enable the card kit to load your merchant's data and ready to process card related operations (e.g. tokenization, authorization and charge.)

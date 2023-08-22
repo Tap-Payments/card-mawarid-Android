@@ -731,21 +731,21 @@ class CardInputForm @JvmOverloads constructor(
         holderNameEditText.setHintTextColor(Color.parseColor(ThemeManager.getValue("cardView.textFields.placeholderColor")))
         holderNameEditText.setTextColor(Color.parseColor(ThemeManager.getValue("cardView.textFields.textColor")))
         cardDetailsText.setTextColor(Color.parseColor(ThemeManager.getValue("cardView.titleLabel.textColor")))
-        cardDetailsText.textSize = ThemeManager.getFontSize("cardView.titleLabel.font").toFloat()
+       // cardDetailsText.textSize = ThemeManager.getFontSize("cardView.titleLabel.font").toFloat()
 
         val cardDetText : String = LocalizationManager.getValue("title","cardForm")
         cardDetailsText.text = cardDetText
 
 
-        cardNumberEditText.textSize = ThemeManager.getFontSize("cardView.textFields.font").toFloat()
-        holderNameEditText.textSize = ThemeManager.getFontSize("cardView.textFields.font").toFloat()
-        cvcNumberEditText.textSize = ThemeManager.getFontSize("cardView.textFields.font").toFloat()
-        expiryDateEditText.textSize = ThemeManager.getFontSize("cardView.textFields.font").toFloat()
+//        cardNumberEditText.textSize = ThemeManager.getFontSize("cardView.textFields.font").toFloat()
+//        holderNameEditText.textSize = ThemeManager.getFontSize("cardView.textFields.font").toFloat()
+//        cvcNumberEditText.textSize = ThemeManager.getFontSize("cardView.textFields.font").toFloat()
+//        expiryDateEditText.textSize = ThemeManager.getFontSize("cardView.textFields.font").toFloat()
 
 
         checkBoxSaveCard.setTextColor(Color.parseColor(ThemeManager.getValue("cardView.saveLabel.textColor")))
        // checkBoxSaveCard.backgroundTintList = ColorStateList.valueOf(Color.parseColor(ThemeManager.getValue("cardView.saveLabel.textColor")))
-        checkBoxSaveCard.textSize = ThemeManager.getFontSize("cardView.saveLabel.font").toFloat()
+//        checkBoxSaveCard.textSize = ThemeManager.getFontSize("cardView.saveLabel.font").toFloat()
         if (context?.let { LocalizationManager.getLocale(it).language } == "en") setFontsEnglish() else setFontsArabic()
         checkBoxSaveCard.setOnCheckedChangeListener { buttonView, isChecked ->
             checkedSaveCardEnabled = isChecked

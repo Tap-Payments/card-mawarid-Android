@@ -146,6 +146,7 @@ class CardRepository : APIRequestCallback , WebViewContract {
             )
         }
         val jsonString = Gson().toJson(createTokenWithCardDataReq)
+
         NetworkController.getInstance().processRequest(
             TapMethodType.POST, ApiService.TOKEN, jsonString,
             this, CREATE_TOKEN_CODE

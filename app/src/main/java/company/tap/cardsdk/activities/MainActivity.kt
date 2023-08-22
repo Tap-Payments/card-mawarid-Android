@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity(), TapCardInputDelegate {
     ) {
         dataConfiguration.addCardInputDelegate(this) //** Required **
         dataConfiguration.initCardForm(
-            this, TapCardDataConfiguration(
+            this@MainActivity, TapCardDataConfiguration(
                 "sk_test_kovrMB0mupFJXfNZWx6Etg5y",
                 "company.tap.goSellSDKExample",
                 null,

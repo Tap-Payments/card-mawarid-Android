@@ -18,8 +18,9 @@ import com.google.android.material.button.MaterialButtonToggleGroup
 import company.tap.cardsdk.BottomSheetFragment
 import company.tap.cardsdk.R
 import company.tap.cardsdk.customer.CustomerActivity
+import company.tap.tapnetworkkit.interfaces.APILoggInterface
 
-class SelectChoiceActivity : AppCompatActivity() {
+class SelectChoiceActivity : AppCompatActivity() ,APILoggInterface{
 
     private lateinit var radioGroup: RadioGroup
     private lateinit var radioGroup2: RadioGroup
@@ -159,5 +160,9 @@ class SelectChoiceActivity : AppCompatActivity() {
             // Invoke the superclass to handle it.
             super.onOptionsItemSelected(item)
         }
+    }
+
+    override fun onLoggingEvent(logs: String?) {
+
     }
 }

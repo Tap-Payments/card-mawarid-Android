@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Resources
 import android.os.Build
+import android.util.Log
 import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -56,7 +57,7 @@ object DataConfiguration  {
        }else if(urlString!=null){
            if (context != null) {
                println("urlString>>>"+urlString)
-               ThemeManager.loadTapTheme(context,urlString)
+               ThemeManager.loadTapTheme(context,urlString,"darktheme")
            }
        }
 
@@ -180,13 +181,16 @@ object DataConfiguration  {
       //  PaymentDataSource.setCardType(dataConfig.selectedCardType)
 
 //TODO NOTE enable/ disable debug this true-false for network call
+        Log.e("data authtoken",dataConfig.authToken.toString())
+        Log.e("data package",dataConfig.packageId.toString())
+
         cardInputForm.visibility = View.GONE
         NetworkApp.initNetwork(
             context,
             dataConfig.authToken,
             dataConfig.packageId,
             ApiService.BASE_URL,
-            "NATIVE",false)
+            "NATIVE",true, context.resources.getString(company.tap.tapnetworkkit_android.R.string.enryptkey),context as AppCompatActivity)
         val requestModel =
             TapConfigRequestModel(dataConfig.authToken?.let {
                 Gateway(

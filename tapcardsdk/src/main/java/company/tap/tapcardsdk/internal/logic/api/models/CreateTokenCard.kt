@@ -1,5 +1,6 @@
 package company.tap.tapcardsdk.internal.logic.api.models
 
+import android.util.Log
 import androidx.annotation.RestrictTo
 import com.google.gson.Gson
 import com.google.gson.annotations.Expose
@@ -52,6 +53,9 @@ class CreateTokenCard constructor(cardNumber: String,
                 it
             )
         }
+        Log.e("encryptionkey",PaymentDataSource.getSDKSettings()?.data?.encryptionKey.toString())
+
+        Log.e("sensitive",this.sensitiveCardData.toString())
         this.address = address
     }
 }

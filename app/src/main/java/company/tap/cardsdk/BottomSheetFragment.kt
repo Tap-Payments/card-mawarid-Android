@@ -128,7 +128,7 @@ class BottomSheetFragment : BottomSheetDialogFragment(), TapCardInputDelegate {
     ) {
         dataConfiguration.addCardInputDelegate(this) //** Required **
         if (::cardInputForm.isInitialized)
-            activity?.applicationContext?.let {
+            activity?.let {
                 dataConfiguration.initCardForm(
                     it, TapCardDataConfiguration(
                         "sk_test_kovrMB0mupFJXfNZWx6Etg5y",

@@ -131,7 +131,7 @@ class BottomSheetFragment : BottomSheetDialogFragment(), TapCardInputDelegate {
             activity?.let {
                 dataConfiguration.initCardForm(
                     it, TapCardDataConfiguration(
-                        "sk_test_kovrMB0mupFJXfNZWx6Etg5y",
+                        "XXXXXXX",
                         "company.tap.goSellSDKExample",
                         null,
                         SdkMode.SAND_BOX,

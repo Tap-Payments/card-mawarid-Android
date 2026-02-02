@@ -92,7 +92,7 @@ Configuration code:
  * @param merchantId to be passed in DataConfig(Optional)
  * @param sdkMode pass the needed sdk mode (sandbox or production). Optional, default is sandbox
  */
-val dataConfiguration = TapCardDataConfiguration("sk_test_kovrMB0mupFJXfNZWx6Etg5y","company.tap.goSellSDKExample" ,null, SdkMode.SAND_BOX)
+val dataConfiguration = TapCardDataConfiguration("XXXXXXXXXXXX","company.tap.goSellSDKExample" ,null, SdkMode.SAND_BOX)
 ```
 ### [](https://github.com/Tap-Payments/card-mawarid-Android-Android#SLC)Single line initialization
 
